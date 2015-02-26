@@ -27,9 +27,9 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public void logout() {
+    public boolean logout() {
         // TODO Auto-generated method stub
-        
+        return true;
     }
 
     @Override

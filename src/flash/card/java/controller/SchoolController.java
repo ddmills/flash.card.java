@@ -27,8 +27,8 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public void logout() {
-        school.logout();
+    public boolean logout() {
+        return school.logout();
     }
 
     @Override

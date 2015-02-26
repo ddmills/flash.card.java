@@ -59,8 +59,6 @@ public class Prompt {
         do {
             print("> ");
             input = read(br);
-            println(input);
-            
             switch (input) {
                 
             case "exit":
@@ -68,11 +66,27 @@ public class Prompt {
                 println("goodbye!");
                 break;
             case "login":
+                String name;
+                String pass;
+                
                 print("Please enter username: ");
-                String name = read(br);
+                name = read(br);
                 print("Please enter password: ");
-                String pass = read(br);
-                println("you input: " + name + " " + pass);
+                pass = read(br);
+
+                if (school.login(name, pass)) {
+                    println("welcome " + name);
+                } else {
+                    println("login failed.");
+                }
+                
+                break;
+            case "logout":
+                if (school.logout()) {
+                    println("you have been logged out");
+                } else {
+                    println("logout failed");
+                }
                 break;
             default:
                 println("Command not recognized");

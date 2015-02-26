@@ -4,7 +4,7 @@ public interface SchoolInterface {
     int createTeacher (String name, String userID, String pass);
     int addStudent (String name, String userID, String pass);
     boolean login (String userID, String pass);
-    void logout ();
+    boolean logout ();
     
     int createDeck (String title, String description);
     int addCard (String front, String back, int deckID);
