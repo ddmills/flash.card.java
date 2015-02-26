@@ -53,27 +53,32 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean createDeck(String title, String description) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean createDeck(int deckID, String title, String description) {
+        Deck d = new Deck(deckID, title, description);
+        return db.putDeck(d);
     }
 
     @Override
-    public boolean createCard(String front, String back, int deckID) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean createCard(int cardID, String front, String back, int deckID) {
+        Deck d = db.getDeck(deckID);
+        d.addCard(cardID, front, back);
+        
+        return db.putDeck(d);
     }
 
     @Override
     public boolean removeCard(int cardID, int deckID) {
-        // TODO Auto-generated method stub
-        return false;
+        Deck d = db.getDeck(deckID);
+        Card c = d.getCard(cardID);
+        d.removeCard(c);
+        return db.putDeck(d);
     }
 
     @Override
-    public boolean createQuiz(String title, String description, int deckID) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean createQuiz(int quizID, String title, String description, int deckID) {
+        Deck d = db.getDeck(deckID);
+        Quiz q = new Quiz(quizID, title, description, d);
+        return db.putQuiz(q);
     }
 
     @Override

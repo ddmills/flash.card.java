@@ -6,10 +6,10 @@ public interface SchoolInterface {
     boolean login (String userID, String pass);
     boolean logout ();
     
-    boolean createDeck (String title, String description);
-    boolean createCard (String front, String back, int deckID);
+    boolean createDeck (int deckID, String title, String description);
+    boolean createCard (int cardID, String front, String back, int deckID);
     boolean removeCard(int cardID, int deckID);
-    boolean createQuiz (String title, String description, int deckID);
+    boolean createQuiz (int quizID, String title, String description, int deckID);
     
     boolean addAllStudentsToQuiz (String quizID);
     boolean addStudentToQuiz (String userID, String quizID);

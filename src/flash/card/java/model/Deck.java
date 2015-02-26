@@ -1,20 +1,25 @@
 package flash.card.java.model;
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 import flash.card.java.interfaces.DeckInterface;
 
 public class Deck implements DeckInterface{
 
     private int deckID;
-    private ArrayList<Card> cardList;
+    private String title;
+    private String description;
+    private HashMap<Integer, Card> cardList;
     
-    public Deck (int deckID) {
+    public Deck (int deckID, String title, String description) {
         this.deckID = deckID;
-        this.cardList = new ArrayList<Card>();
+        this.title = title;
+        this.description = description;
+        this.cardList = new HashMap<Integer, Card>();
     }
     
-    public Deck (int deckID, ArrayList<Card> cardList) {
+    public Deck (int deckID, HashMap<Integer, Card> cardList) {
         this.deckID = deckID;
         this.cardList = cardList;
     }
@@ -27,13 +32,19 @@ public class Deck implements DeckInterface{
     @Override
     public boolean addCard(int cardID, String front, String back) {
         Card c = new Card(cardID, front, back);
-        return this.cardList.add(c);
+        this.cardList.put(c.getCardID(), c);
+        return true;
     }
 
     @Override
     public boolean removeCard(Card c) {
         
-        return this.cardList.remove(c);
+        return this.cardList.remove(c.getCardID(), c);
+    }
+
+    public Card getCard(int cardID) {
+        
+        return this.cardList.get(cardID);
     }
 
 }

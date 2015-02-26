@@ -32,13 +32,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean createDeck(String title, String description) {
-        return school.createDeck(title, description);
+    public boolean createDeck(int deckID, String title, String description) {
+        return school.createDeck(deckID, title, description);
     }
 
     @Override
-    public boolean createCard(String front, String back, int deckID) {
-        return school.createCard(front, back, deckID);
+    public boolean createCard(int cardID, String front, String back, int deckID) {
+        return school.createCard(cardID, front, back, deckID);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean createQuiz(String title, String description, int deckID) {
-        return school.createQuiz(title, description, deckID);
+    public boolean createQuiz(int quizID, String title, String description, int deckID) {
+        return school.createQuiz(quizID, title, description, deckID);
     }
 
     @Override
