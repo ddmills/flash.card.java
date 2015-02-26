@@ -1,9 +1,9 @@
 package flash.card.java.controller;
 
 public interface SchoolControllerInterface {
-    int createTeacher (String name, String pass);
-    int addStudent (String name, String pass);
-    boolean login (int userID, String pass);
+    int createTeacher (String name, String userID, String pass);
+    int addStudent (String name, String userID, String pass);
+    boolean login (String userID, String pass);
     void logout ();
     
     int createDeck (String title, String description);
@@ -12,7 +12,7 @@ public interface SchoolControllerInterface {
     int createQuiz (String title, String description, int deckID);
     
     boolean addAllStudentsToQuiz (String quizID);
-    boolean addStudentToQuiz (String studentID, String quizID);
+    boolean addStudentToQuiz (String userID, String quizID);
     boolean removeAllStudentsFromQuiz (String quizID);
-    boolean removeStudentFromQuiz (String studentID, String quizID);
+    boolean removeStudentFromQuiz (String userID, String quizID);
 }

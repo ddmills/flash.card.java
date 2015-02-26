@@ -1,21 +1,21 @@
 package flash.card.java.controller;
 
-public class SchoolController implements SchoolControllerInterface{
+public class SchoolController implements SchoolControllerInterface {
 
     @Override
-    public int createTeacher(String name, String pass) {
+    public int createTeacher(String name, String userID, String pass) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public int addStudent(String name, String pass) {
+    public int addStudent(String name, String userID, String pass) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public boolean login(int userID, String pass) {
+    public boolean login(String userID, String pass) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -23,7 +23,6 @@ public class SchoolController implements SchoolControllerInterface{
     @Override
     public void logout() {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
@@ -57,7 +56,7 @@ public class SchoolController implements SchoolControllerInterface{
     }
 
     @Override
-    public boolean addStudentToQuiz(String studentID, String quizID) {
+    public boolean addStudentToQuiz(String userID, String quizID) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -69,9 +68,8 @@ public class SchoolController implements SchoolControllerInterface{
     }
 
     @Override
-    public boolean removeStudentFromQuiz(String studentID, String quizID) {
+    public boolean removeStudentFromQuiz(String userID, String quizID) {
         // TODO Auto-generated method stub
         return false;
     }
-
 }
