@@ -2,12 +2,17 @@ package flash.card.java.model;
 
 import flash.card.java.interfaces.StudentInterface;
 
-public class Student implements StudentInterface {
+public class Student extends User implements StudentInterface {
 
-    int userID;
     String name;
-    String password;
     
+    public Student(String name, String userID, String pass) {
+        this.name = name;
+        this.userID = userID;
+        this.password = pass;
+        this.accessLevel = AccessLevel.student;
+    }
+
     @Override
     public int getUserID() {
         // TODO Auto-generated method stub

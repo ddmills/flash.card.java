@@ -12,13 +12,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
     
     @Override
-    public int createTeacher(String name, String userID, String pass) {
+    public boolean createTeacher(String name, String userID, String pass) {
         return school.createTeacher(name, userID, pass);
     }
 
     @Override
-    public int addStudent(String name, String userID, String pass) {
-        return school.addStudent(name, userID, pass);
+    public boolean createStudent(String name, String userID, String pass) {
+        return school.createStudent(name, userID, pass);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public int createDeck(String title, String description) {
+    public boolean createDeck(String title, String description) {
         return school.createDeck(title, description);
     }
 
     @Override
-    public int addCard(String front, String back, int deckID) {
-        return school.addCard(front, back, deckID);
+    public boolean createCard(String front, String back, int deckID) {
+        return school.createCard(front, back, deckID);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public int createQuiz(String title, String description, int deckID) {
+    public boolean createQuiz(String title, String description, int deckID) {
         return school.createQuiz(title, description, deckID);
     }
 

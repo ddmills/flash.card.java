@@ -6,18 +6,27 @@ import flash.card.java.interfaces.SchoolInterface;
 public class School implements SchoolInterface {
 
     CurrentUser user;
-    DatabaseSupport db;
+    DatabaseSupport db = null;
+    
+    private DatabaseSupport getDatabaseSupportInstance () {
+        if(db == null)
+        {
+            db = new DatabaseSupport();
+        }
+        return db;
+    }
     
     @Override
-    public int createTeacher(String name, String userID, String pass) {
+    public boolean createTeacher(String name, String userID, String pass) {
         // TODO Auto-generated method stub
-        return 0;
+        return false;
     }
 
     @Override
-    public int addStudent(String name, String userID, String pass) {
-        // TODO Auto-generated method stub
-        return 0;
+    public boolean createStudent(String name, String userID, String pass) {
+        Student s = new Student(name, userID, pass);
+        
+        return this.getDatabaseSupportInstance().putStudent(s);
     }
 
     @Override
@@ -33,15 +42,15 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public int createDeck(String title, String description) {
+    public boolean createDeck(String title, String description) {
         // TODO Auto-generated method stub
-        return 0;
+        return false;
     }
 
     @Override
-    public int addCard(String front, String back, int deckID) {
+    public boolean createCard(String front, String back, int deckID) {
         // TODO Auto-generated method stub
-        return 0;
+        return false;
     }
 
     @Override
@@ -51,9 +60,9 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public int createQuiz(String title, String description, int deckID) {
+    public boolean createQuiz(String title, String description, int deckID) {
         // TODO Auto-generated method stub
-        return 0;
+        return false;
     }
 
     @Override
@@ -69,7 +78,7 @@ public class School implements SchoolInterface {
         Quiz q = db.getQuiz(quizID);
         s.addQuiz(q);
         
-        return db.putStudent(s);
+        return this.getDatabaseSupportInstance().putStudent(s);
     }
 
     @Override
@@ -85,7 +94,7 @@ public class School implements SchoolInterface {
         Quiz q = db.getQuiz(quizID);
         s.removeQuiz(q);
         
-        return db.putStudent(s);
+        return this.getDatabaseSupportInstance().putStudent(s);
     }
 
 }
