@@ -1,27 +1,39 @@
 package flash.card.java.model;
 
+import java.util.ArrayList;
+
 import flash.card.java.interfaces.DeckInterface;
 
 public class Deck implements DeckInterface{
 
-    int deckID;
+    private int deckID;
+    private ArrayList<Card> cardList;
+    
+    public Deck (int deckID) {
+        this.deckID = deckID;
+        this.cardList = new ArrayList<Card>();
+    }
+    
+    public Deck (int deckID, ArrayList<Card> cardList) {
+        this.deckID = deckID;
+        this.cardList = cardList;
+    }
     
     @Override
     public int getDeckID() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.deckID;
     }
 
     @Override
-    public Card addCard(String title, String description) {
-        // TODO Auto-generated method stub
-        return null;
+    public boolean addCard(int cardID, String front, String back) {
+        Card c = new Card(cardID, front, back);
+        return this.cardList.add(c);
     }
 
     @Override
-    public boolean removeCard(int cardID) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean removeCard(Card c) {
+        
+        return this.cardList.remove(c);
     }
 
 }

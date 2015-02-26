@@ -4,6 +4,6 @@ import flash.card.java.model.Card;
 
 public interface DeckInterface {
     int getDeckID ();
-    Card addCard (String title, String description);
-    boolean removeCard (int cardID);
+    boolean addCard (int cardID, String front, String back);
+    boolean removeCard (Card c);
 }

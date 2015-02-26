@@ -4,13 +4,13 @@ import flash.card.java.interfaces.QuizInterface;
 
 public class Quiz implements QuizInterface{
 
-    int quizID;
-    Deck deck;
+    private int quizID;
+    private Deck deck;
     
     @Override
     public int getQuizID() {
-        // TODO Auto-generated method stub
-        return 0;
+        
+        return this.quizID;
     }
 
     

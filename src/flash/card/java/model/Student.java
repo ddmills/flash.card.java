@@ -6,7 +6,7 @@ import flash.card.java.interfaces.StudentInterface;
 
 public class Student extends User implements StudentInterface {
 
-    ArrayList<Quiz> quizList;
+    private ArrayList<Quiz> quizList;
 
     public Student(String userID, String pass, String name) {
         super(userID, pass, name);
@@ -15,9 +15,9 @@ public class Student extends User implements StudentInterface {
     }
 
     @Override
-    public int getUserID() {
+    public String getUserID() {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
     @Override
