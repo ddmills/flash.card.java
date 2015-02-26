@@ -98,6 +98,10 @@ public class Prompt {
             attempt(school.logout());
             break;
             
+        case "create teacher":
+            attempt(school.createTeacher(ask("name"), ask("username"), ask("password")));
+            break;
+            
         default:
             println("command not recognized");
         }

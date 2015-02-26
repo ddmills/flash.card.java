@@ -16,7 +16,12 @@ public class School implements SchoolInterface {
     
     @Override
     public boolean createTeacher(String name, String userID, String pass) {
-        // TODO Auto-generated method stub
+        if (user.isSet()) {
+            if (user.get().access() == AccessLevel.principal) {
+                Teacher t = new Teacher(name, userID, pass);
+                return db.putTeacher(t);
+            }
+        }
         return false;
     }
 

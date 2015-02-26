@@ -29,5 +29,4 @@ public class Student extends User implements StudentInterface {
     public boolean removeQuiz(Quiz q) {
         return this.quizList.remove(q);
     }
-
 }

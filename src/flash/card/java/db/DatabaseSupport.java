@@ -6,6 +6,7 @@ import flash.card.java.model.Deck;
 import flash.card.java.model.Principal;
 import flash.card.java.model.Quiz;
 import flash.card.java.model.Student;
+import flash.card.java.model.Teacher;
 import flash.card.java.model.User;
 
 public class DatabaseSupport implements DatabaseSupportInterface {
@@ -34,9 +35,17 @@ public class DatabaseSupport implements DatabaseSupportInterface {
 
     @Override
     public boolean putStudent(Student s) {
+        return true;
+    }
+    
+    @Override
+    public boolean putPrincipal(Principal p) {
         return false;
-        // TODO Auto-generated method stub
-
+    }
+    
+    @Override
+    public boolean putTeacher(Teacher t) {
+        return true;
     }
 
     @Override

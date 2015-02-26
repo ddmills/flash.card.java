@@ -15,4 +15,8 @@ public abstract class User {
     public boolean comparePassword(String password) {
         return this.password.equals(password);
     }
+    
+    public AccessLevel access() {
+        return this.accessLevel;
+    }
 }
