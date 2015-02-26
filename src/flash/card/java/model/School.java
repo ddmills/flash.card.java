@@ -54,32 +54,56 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean createDeck(int deckID, String title, String description) {
-        Deck d = new Deck(deckID, title, description);
-        return db.putDeck(d);
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = new Deck(deckID, title, description);
+                d.setOwner(this.user.get());
+                return db.putDeck(d);
+            }
+        }
+        return false;
+        
     }
 
     @Override
     public boolean createCard(int cardID, String front, String back, int deckID) {
-        Deck d = db.getDeck(deckID);
-        d.addCard(cardID, front, back);
-        d.setOwner(this.user.get());
-        return db.putDeck(d);
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                d.addCard(cardID, front, back);
+                return db.putDeck(d);
+            }
+        }
+        return false;
+        
     }
 
     @Override
     public boolean removeCard(int cardID, int deckID) {
-        Deck d = db.getDeck(deckID);
-        Card c = d.getCard(cardID);
-        d.removeCard(c);
-        return db.putDeck(d);
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                Card c = d.getCard(cardID);
+                d.removeCard(c);
+                return db.putDeck(d);
+            }
+        }
+        return false;
+        
     }
 
     @Override
     public boolean createQuiz(int quizID, String title, String description, int deckID) {
-        Deck d = db.getDeck(deckID);
-        Quiz q = new Quiz(quizID, title, description, d);
-        q.setOwner(this.user.get());
-        return db.putQuiz(q);
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                Quiz q = new Quiz(quizID, title, description, d);
+                q.setOwner(this.user.get());
+                return db.putQuiz(q);
+            }
+        }
+        return false;
+        
     }
 
     @Override
@@ -91,12 +115,17 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean addStudentToQuiz(String userID, String quizID) {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Student s = db.getStudent(userID);
+                Quiz q = db.getQuiz(quizID);
+                s.addQuiz(q);
         
-        Student s = db.getStudent(userID);
-        Quiz q = db.getQuiz(quizID);
-        s.addQuiz(q);
+                return this.db.putStudent(s);
+            }
+        }
+        return false;
         
-        return this.db.putStudent(s);
     }
 
     @Override
@@ -107,12 +136,17 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean removeStudentFromQuiz(String userID, String quizID) {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Student s = db.getStudent(userID);
+                Quiz q = db.getQuiz(quizID);
+                s.removeQuiz(q);
         
-        Student s = db.getStudent(userID);
-        Quiz q = db.getQuiz(quizID);
-        s.removeQuiz(q);
+                return this.db.putStudent(s);
+            }
+        }
+        return false;
         
-        return this.db.putStudent(s);
     }
 
 }

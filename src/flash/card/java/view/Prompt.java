@@ -101,7 +101,18 @@ public class Prompt {
         case "create teacher":
             attempt(school.createTeacher(ask("name"), ask("username"), ask("password")));
             break;
-            
+        case "create student":
+            attempt(school.createStudent(ask("name"), ask("username"), ask("password")));
+            break;
+        case "create deck":
+            attempt(school.createDeck(askInt("deckID"), ask("title"), ask("description")));
+            break;
+        case "create card":
+            attempt(school.createCard(askInt("cardID"), ask("front text"), ask("back text"), askInt("deckID")));
+            break;
+        case "create quiz":
+            attempt(school.createQuiz(askInt("quizID"), ask("title"), ask("description"), askInt("deckID")));
+            break;
         default:
             println("command not recognized");
         }
