@@ -7,6 +7,17 @@ import java.io.InputStreamReader;
 import flash.card.java.controller.SchoolController;
 
 public class Prompt {
+    private SchoolController school;
+    private boolean running;
+    private BufferedReader br;
+    private String cmd;
+    
+    private Prompt() {
+        school = new SchoolController();
+        running = true;
+        br = new BufferedReader(new InputStreamReader(System.in));
+    }
+    
     private static void print(int line) {
         System.out.print(line);
     }
@@ -23,7 +34,7 @@ public class Prompt {
         System.out.println(line);
     }
     
-    private static String read(BufferedReader br) {
+    private String read() {
         try {
             return br.readLine();
         } catch (IOException io) {
@@ -33,10 +44,10 @@ public class Prompt {
         }
     }
     
-    private static int readInt(BufferedReader br) {
+    private int readInt() {
         while (true) {
             try {
-                String inpt = read(br);
+                String inpt = read();
                 int ret = Integer.parseInt(inpt);
                 return ret;
             } catch (NumberFormatException e) {
@@ -45,52 +56,51 @@ public class Prompt {
         }
     }
     
+    private String ask(String var) {
+        print(var + ": ");
+        return read();
+    }
+    
+    private int askInt(String var) {
+        print(var + ": ");
+        return readInt();
+    }
+    
+    private boolean attempt(boolean command) {
+        if (command) {
+            println(cmd + " succeeded");
+        } else {
+            println(cmd + " failed");
+        }
+        return command;
+    }
+    
+    private void handle(String command) {
+        switch (command) {
+        case "exit":
+            running = false;
+            println("goodbye!");
+            break;
+            
+        case "login":
+            attempt(school.login(ask("username"), ask("password")));
+            break;
+            
+        case "logout":
+            attempt(school.logout());
+            break;
+            
+        default:
+            println("command not recognized");
+        }
+    }
+    
     public static void main (String args[]) {
-        boolean running;
-        String input;
-        BufferedReader br;
-        
-        
-        SchoolController school = new SchoolController();
-        
-        br = new BufferedReader(new InputStreamReader(System.in));
-        running = true;
-        
+        Prompt p = new Prompt();
         do {
             print("> ");
-            input = read(br);
-            switch (input) {
-                
-            case "exit":
-                running = false;
-                println("goodbye!");
-                break;
-            case "login":
-                String name;
-                String pass;
-                
-                print("Please enter username: ");
-                name = read(br);
-                print("Please enter password: ");
-                pass = read(br);
-
-                if (school.login(name, pass)) {
-                    println("welcome " + name);
-                } else {
-                    println("login failed.");
-                }
-                
-                break;
-            case "logout":
-                if (school.logout()) {
-                    println("you have been logged out");
-                } else {
-                    println("logout failed");
-                }
-                break;
-            default:
-                println("Command not recognized");
-            }
-        } while (running);
+            p.cmd = p.read();
+            p.handle(p.cmd);
+        } while (p.running);
     }
 }

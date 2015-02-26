@@ -5,7 +5,7 @@ package flash.card.java.model;
  */
 public class CurrentUser {
     private static CurrentUser instance = null;
-
+    
     public static CurrentUser getInstance() {
         if (instance == null) {
             instance = new CurrentUser();
