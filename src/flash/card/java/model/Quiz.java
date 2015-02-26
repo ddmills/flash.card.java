@@ -1,5 +1,17 @@
 package flash.card.java.model;
 
-public class Quiz {
+import flash.card.java.interfaces.QuizInterface;
 
+public class Quiz implements QuizInterface{
+
+    int quizID;
+    Deck deck;
+    
+    @Override
+    public int getQuizID() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    
 }

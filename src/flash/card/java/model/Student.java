@@ -4,6 +4,10 @@ import flash.card.java.interfaces.StudentInterface;
 
 public class Student implements StudentInterface {
 
+    int userID;
+    String name;
+    String password;
+    
     @Override
     public int getUserID() {
         // TODO Auto-generated method stub

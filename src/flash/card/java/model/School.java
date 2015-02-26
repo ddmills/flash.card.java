@@ -4,6 +4,8 @@ import flash.card.java.interfaces.SchoolInterface;
 
 public class School implements SchoolInterface {
 
+    CurrentUser user;
+    
     @Override
     public int createTeacher(String name, String userID, String pass) {
         // TODO Auto-generated method stub
