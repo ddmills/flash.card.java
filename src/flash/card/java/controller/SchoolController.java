@@ -5,7 +5,7 @@ import flash.card.java.model.School;
 
 public class SchoolController implements SchoolControllerInterface {
 
-    School school;
+    private School school;
     
     public SchoolController() {
         school = new School();

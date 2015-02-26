@@ -1,16 +1,20 @@
 package flash.card.java.model;
 
+import java.util.ArrayList;
+
 import flash.card.java.interfaces.StudentInterface;
 
 public class Student extends User implements StudentInterface {
 
     String name;
+    ArrayList<Quiz> quizList;
     
     public Student(String name, String userID, String pass) {
         this.name = name;
         this.userID = userID;
         this.password = pass;
         this.accessLevel = AccessLevel.student;
+        this.quizList = new ArrayList<Quiz>();
     }
 
     @Override
@@ -21,14 +25,14 @@ public class Student extends User implements StudentInterface {
 
     @Override
     public boolean addQuiz(Quiz q) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        return this.quizList.add(q);
     }
 
     @Override
     public boolean removeQuiz(Quiz q) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        return this.quizList.remove(q);
     }
 
 }
