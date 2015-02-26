@@ -6,7 +6,7 @@ import flash.card.java.interfaces.StudentInterface;
 
 public class Student extends User implements StudentInterface {
 
-    ArrayList<Quiz> quizList;
+    private ArrayList<Quiz> quizList;
 
     public Student(String userID, String pass, String name) {
         super(userID, pass, name);
