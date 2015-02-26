@@ -11,6 +11,7 @@ public class Deck implements DeckInterface{
     private String title;
     private String description;
     private HashMap<Integer, Card> cardList;
+    private User owner;
     
     public Deck (int deckID, String title, String description) {
         this.deckID = deckID;
@@ -40,6 +41,16 @@ public class Deck implements DeckInterface{
     public boolean removeCard(Card c) {
         
         return this.cardList.remove(c.getCardID(), c);
+    }
+    
+    public boolean setOwner(User u) {
+        if(owner == null) {
+            this.owner = u;
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     public Card getCard(int cardID) {

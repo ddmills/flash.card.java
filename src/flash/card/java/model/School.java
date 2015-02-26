@@ -62,7 +62,7 @@ public class School implements SchoolInterface {
     public boolean createCard(int cardID, String front, String back, int deckID) {
         Deck d = db.getDeck(deckID);
         d.addCard(cardID, front, back);
-        
+        d.setOwner(this.user.get());
         return db.putDeck(d);
     }
 
@@ -78,11 +78,13 @@ public class School implements SchoolInterface {
     public boolean createQuiz(int quizID, String title, String description, int deckID) {
         Deck d = db.getDeck(deckID);
         Quiz q = new Quiz(quizID, title, description, d);
+        q.setOwner(this.user.get());
         return db.putQuiz(q);
     }
 
     @Override
     public boolean addAllStudentsToQuiz(String quizID) {
+        // Add course object type
         // TODO Auto-generated method stub
         return false;
     }

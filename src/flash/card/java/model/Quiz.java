@@ -23,5 +23,16 @@ public class Quiz implements QuizInterface{
         return this.quizID;
     }
 
+    @Override
+    public boolean setOwner(User u) {
+        if(this.owner == null) {
+            this.owner = u;
+            return true;
+        } else { 
+            return false;
+        }
+        
+    }
+
     
 }
