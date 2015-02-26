@@ -1,72 +1,77 @@
-package flash.card.java.controller;
+package flash.card.java.model;
 
-import flash.card.java.model.School;
+public class School implements SchoolInterface {
 
-public class SchoolController implements SchoolControllerInterface {
-
-    School school;
-    
-    public SchoolController() {
-        school = new School();
-    }
-    
     @Override
     public int createTeacher(String name, String userID, String pass) {
-        return school.createTeacher(name, userID, pass);
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public int addStudent(String name, String userID, String pass) {
-        return school.addStudent(name, userID, pass);
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public boolean login(String userID, String pass) {
-        return school.login(userID, pass);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public void logout() {
-        school.logout();
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public int createDeck(String title, String description) {
-        return school.createDeck(title, description);
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public int addCard(String front, String back, int deckID) {
-        return school.addCard(front, back, deckID);
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public boolean removeCard(int cardID, int deckID) {
-        return school.removeCard(cardID, deckID);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public int createQuiz(String title, String description, int deckID) {
-        return school.createQuiz(title, description, deckID);
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public boolean addAllStudentsToQuiz(String quizID) {
-        return school.addAllStudentsToQuiz(quizID);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public boolean addStudentToQuiz(String userID, String quizID) {
-        return school.addStudentToQuiz(userID, quizID);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public boolean removeAllStudentsFromQuiz(String quizID) {
-        return school.removeAllStudentsFromQuiz(quizID);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public boolean removeStudentFromQuiz(String userID, String quizID) {
-        return school.removeStudentFromQuiz(userID, quizID);
+        // TODO Auto-generated method stub
+        return false;
     }
+
 }

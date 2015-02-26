@@ -1,21 +1,21 @@
 package flash.card.java.model;
 
-public class Deck implements DeckInterface{
+public class Student implements StudentInterface {
 
     @Override
-    public int getDeckID() {
+    public int getUserID() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public Card addCard(String title, String description) {
+    public boolean addQuiz(Quiz q) {
         // TODO Auto-generated method stub
-        return null;
+        return false;
     }
 
     @Override
-    public boolean removeCard(int cardID) {
+    public boolean removeQuiz(Quiz q) {
         // TODO Auto-generated method stub
         return false;
     }
