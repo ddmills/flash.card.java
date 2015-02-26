@@ -1,4 +1,4 @@
-package flash.card.java.model;
+package flash.card.java.interfaces;
 
 public interface QuizInterface {
     int getQuizID();

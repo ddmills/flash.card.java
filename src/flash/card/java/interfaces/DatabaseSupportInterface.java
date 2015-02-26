@@ -1,4 +1,4 @@
-package flash.card.java.db;
+package flash.card.java.interfaces;
 
 import flash.card.java.model.Card;
 import flash.card.java.model.Deck;

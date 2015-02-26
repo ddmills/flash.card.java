@@ -1,5 +1,6 @@
 package flash.card.java.db;
 
+import flash.card.java.interfaces.DatabaseSupportInterface;
 import flash.card.java.model.Card;
 import flash.card.java.model.Deck;
 import flash.card.java.model.Quiz;

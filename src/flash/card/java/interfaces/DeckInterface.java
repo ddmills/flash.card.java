@@ -1,4 +1,6 @@
-package flash.card.java.model;
+package flash.card.java.interfaces;
+
+import flash.card.java.model.Card;
 
 public interface DeckInterface {
     int getDeckID ();

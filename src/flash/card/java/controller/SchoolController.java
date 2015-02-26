@@ -1,5 +1,6 @@
 package flash.card.java.controller;
 
+import flash.card.java.interfaces.SchoolControllerInterface;
 import flash.card.java.model.School;
 
 public class SchoolController implements SchoolControllerInterface {

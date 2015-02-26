@@ -1,5 +1,7 @@
 package flash.card.java.model;
 
+import flash.card.java.interfaces.DeckInterface;
+
 public class Deck implements DeckInterface{
 
     @Override

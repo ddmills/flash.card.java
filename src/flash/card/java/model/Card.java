@@ -1,5 +1,7 @@
 package flash.card.java.model;
 
+import flash.card.java.interfaces.CardInterface;
+
 public class Card implements CardInterface{
 
     @Override

@@ -1,6 +1,6 @@
-package flash.card.java.controller;
+package flash.card.java.interfaces;
 
-public interface SchoolControllerInterface {
+public interface SchoolInterface {
     int createTeacher (String name, String userID, String pass);
     int addStudent (String name, String userID, String pass);
     boolean login (String userID, String pass);
