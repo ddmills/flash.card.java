@@ -9,8 +9,8 @@ public class Quiz implements QuizInterface{
     
     @Override
     public int getQuizID() {
-        // TODO Auto-generated method stub
-        return 0;
+        
+        return this.quizID;
     }
 
     

@@ -8,10 +8,17 @@ public class Card implements CardInterface{
     private String front;
     private String back;
     
+    public Card (int id, String front, String back) {
+        this.cardID = id;
+        this.front = front;
+        this.back = back;
+    }
+    
     @Override
     public int getCardID() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.cardID;
     }
+    
+    
 
 }
