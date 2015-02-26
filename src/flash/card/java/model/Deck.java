@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import flash.card.java.interfaces.DeckInterface;
 
-public class Deck implements DeckInterface{
+public class Deck implements DeckInterface {
 
     private int deckID;
     private String title;

@@ -1,5 +1,9 @@
 package flash.card.java.db;
 
+import java.sql.DriverManager;
+import java.sql.Connection;
+
+
 import flash.card.java.interfaces.DatabaseSupportInterface;
 import flash.card.java.model.Card;
 import flash.card.java.model.Deck;
@@ -11,6 +15,11 @@ import flash.card.java.model.User;
 
 public class DatabaseSupport implements DatabaseSupportInterface {
     private static DatabaseSupport instance = null;
+    private Connection connection = null;
+    
+    private DatabaseSupport() {
+        
+    }
     
     public static DatabaseSupport getInstance() {
         if (instance == null) {
@@ -83,6 +92,16 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     public boolean putQuiz(Quiz q) {
         // TODO Auto-generated method stub
         return false;
+    }
+    
+    private Connection getConnection() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("localhost", "root", "localhost");
+        } catch (Exception e) {
+            connection = null;
+        }
+        return connection;
     }
 
 }

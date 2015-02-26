@@ -85,19 +85,12 @@ public class Prompt {
     
     private void handle(String command) {
         switch (command) {
-        case "exit":
-            running = false;
-            println("goodbye!");
-            break;
-            
         case "login":
             attempt(school.login(ask("username"), ask("password")));
             break;
-            
         case "logout":
             attempt(school.logout());
             break;
-            
         case "create teacher":
             attempt(school.createTeacher(ask("name"), ask("username"), ask("password")));
             break;
@@ -112,6 +105,10 @@ public class Prompt {
             break;
         case "create quiz":
             attempt(school.createQuiz(askInt("quizID"), ask("title"), ask("description"), askInt("deckID")));
+            break;
+        case "exit":
+            running = false;
+            println("goodbye!");
             break;
         default:
             println("command not recognized");
