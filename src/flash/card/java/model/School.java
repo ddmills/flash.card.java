@@ -1,10 +1,12 @@
 package flash.card.java.model;
 
+import flash.card.java.db.DatabaseSupport;
 import flash.card.java.interfaces.SchoolInterface;
 
 public class School implements SchoolInterface {
 
     CurrentUser user;
+    DatabaseSupport db;
     
     @Override
     public int createTeacher(String name, String userID, String pass) {
@@ -62,8 +64,12 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean addStudentToQuiz(String userID, String quizID) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        Student s = db.getStudent(userID);
+        Quiz q = db.getQuiz(quizID);
+        s.addQuiz(q);
+        
+        return db.putStudent(s);
     }
 
     @Override
@@ -74,8 +80,12 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean removeStudentFromQuiz(String userID, String quizID) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        Student s = db.getStudent(userID);
+        Quiz q = db.getQuiz(quizID);
+        s.removeQuiz(q);
+        
+        return db.putStudent(s);
     }
 
 }

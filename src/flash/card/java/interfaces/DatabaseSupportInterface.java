@@ -11,10 +11,10 @@ public interface DatabaseSupportInterface {
     User getUser(String userID);
     
     Student getStudent(String studentID);
-    void putStudent(Student s);
+    boolean putStudent(Student s);
     
     Deck getDeck(int deckID);
-    void putDeck(Deck d);
+    boolean putDeck(Deck d);
     
     Card putCard(Card c);
     boolean removeCard(Deck d, Card c);

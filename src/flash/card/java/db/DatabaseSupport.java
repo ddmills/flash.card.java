@@ -28,7 +28,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public void putStudent(Student s) {
+    public boolean putStudent(Student s) {
+        return false;
         // TODO Auto-generated method stub
 
     }
@@ -40,8 +41,9 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public void putDeck(Deck d) {
+    public boolean putDeck(Deck d) {
         // TODO Auto-generated method stub
+        return false;
 
     }
 
