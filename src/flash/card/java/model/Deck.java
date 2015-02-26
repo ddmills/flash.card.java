@@ -4,7 +4,7 @@ import flash.card.java.interfaces.DeckInterface;
 
 public class Deck implements DeckInterface{
 
-    int deckID;
+    private int deckID;
     
     @Override
     public int getDeckID() {

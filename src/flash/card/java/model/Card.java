@@ -4,9 +4,9 @@ import flash.card.java.interfaces.CardInterface;
 
 public class Card implements CardInterface{
 
-    int cardID;
-    String front;
-    String back;
+    private int cardID;
+    private String front;
+    private String back;
     
     @Override
     public int getCardID() {
