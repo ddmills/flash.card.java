@@ -7,7 +7,6 @@ import flash.card.java.model.Student;
 import flash.card.java.model.User;
 
 public interface DatabaseSupportInterface {
-    boolean confirmCredentials (int userID, String pass);
     User getUser(String userID);
     
     Student getStudent(String studentID);

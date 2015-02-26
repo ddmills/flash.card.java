@@ -12,10 +12,18 @@ public class Prompt {
     private BufferedReader br;
     private String cmd;
     
-    private Prompt() {
+    public Prompt() {
         school = new SchoolController();
         running = true;
         br = new BufferedReader(new InputStreamReader(System.in));
+    }
+    
+    public void start() {
+        do {
+            print("> ");
+            cmd = read();
+            handle(cmd);
+        } while (running);
     }
     
     private static void print(int line) {
@@ -97,10 +105,6 @@ public class Prompt {
     
     public static void main (String args[]) {
         Prompt p = new Prompt();
-        do {
-            print("> ");
-            p.cmd = p.read();
-            p.handle(p.cmd);
-        } while (p.running);
+        p.start();
     }
 }

@@ -8,13 +8,11 @@ public class School implements SchoolInterface {
     CurrentUser user;
     DatabaseSupport db = null;
     
-    private DatabaseSupport getDatabaseSupportInstance () {
-        if(db == null)
-        {
-            db = new DatabaseSupport();
-        }
-        return db;
+    public School() {
+        this.user = new CurrentUser();
+        this.db = DatabaseSupport.getInstance();
     }
+    
     
     @Override
     public boolean createTeacher(String name, String userID, String pass) {
@@ -26,19 +24,27 @@ public class School implements SchoolInterface {
     public boolean createStudent(String name, String userID, String pass) {
         Student s = new Student(name, userID, pass);
         
-        return this.getDatabaseSupportInstance().putStudent(s);
+        return this.db.putStudent(s);
     }
 
     @Override
     public boolean login(String userID, String pass) {
-        // TODO Auto-generated method stub
+        if (!user.isSet()) {
+            try {
+                User provided;
+                provided = db.getUser(userID);
+                if (provided.comparePassword(pass)) {
+                    user.set(provided);
+                    return true;
+                }
+            } catch(Exception e) {}
+        }
         return false;
     }
 
     @Override
     public boolean logout() {
-        // TODO Auto-generated method stub
-        return true;
+        return user.unset();
     }
 
     @Override
@@ -78,7 +84,7 @@ public class School implements SchoolInterface {
         Quiz q = db.getQuiz(quizID);
         s.addQuiz(q);
         
-        return this.getDatabaseSupportInstance().putStudent(s);
+        return this.db.putStudent(s);
     }
 
     @Override
@@ -94,7 +100,7 @@ public class School implements SchoolInterface {
         Quiz q = db.getQuiz(quizID);
         s.removeQuiz(q);
         
-        return this.getDatabaseSupportInstance().putStudent(s);
+        return this.db.putStudent(s);
     }
 
 }

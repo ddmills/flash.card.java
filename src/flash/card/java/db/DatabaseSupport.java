@@ -3,21 +3,26 @@ package flash.card.java.db;
 import flash.card.java.interfaces.DatabaseSupportInterface;
 import flash.card.java.model.Card;
 import flash.card.java.model.Deck;
+import flash.card.java.model.Principal;
 import flash.card.java.model.Quiz;
 import flash.card.java.model.Student;
 import flash.card.java.model.User;
 
 public class DatabaseSupport implements DatabaseSupportInterface {
-
-    @Override
-    public boolean confirmCredentials(int userID, String pass) {
-        // TODO Auto-generated method stub
-        return false;
+    private static DatabaseSupport instance = null;
+    
+    public static DatabaseSupport getInstance() {
+        if (instance == null) {
+            instance = new DatabaseSupport();
+        }
+        return instance;
     }
 
     @Override
     public User getUser(String userID) {
-        // TODO Auto-generated method stub
+        if (userID.equals("admin")) {
+            return new Principal("admin", "admin", "admin");
+        }
         return null;
     }
 
