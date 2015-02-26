@@ -16,8 +16,8 @@ public class Student extends User implements StudentInterface {
 
     @Override
     public String getUserID() {
-        // TODO Auto-generated method stub
-        return null;
+        
+        return this.userID;
     }
 
     @Override
