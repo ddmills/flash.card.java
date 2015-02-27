@@ -8,7 +8,7 @@ We are using a localhost for this project. The database is called "flashcards"
 Plaintext passwords... please never do this ever.
 ```mysql
 CREATE TABLE `user` (
-    `id` INT(11) NOT NULL,
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(50) NOT NULL,
     `type` ENUM('principal','teacher','student') NOT NULL,
     `name` VARCHAR(50) NOT NULL,
@@ -20,7 +20,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 ```
 
-### Deck table:
+### deck table:
 ```mysql
 CREATE TABLE `deck` (
     `deckID` INT(11) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `deck` (
 ENGINE=InnoDB;
 ```
 
-### Card table:
+### card table:
 ```mysql
 CREATE TABLE `card` (
     `cardID` INT(11) NOT NULL,
@@ -49,7 +49,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 ```
 
-### Quiz table:
+### quiz table:
 ```mysql
 CREATE TABLE `quiz` (
     `quizID` INT(11) NOT NULL,
