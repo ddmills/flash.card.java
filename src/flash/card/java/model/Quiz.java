@@ -16,6 +16,14 @@ public class Quiz implements QuizInterface{
         this.description = description;
         this.deck = d;
     }
+    
+    public Quiz(int quizID, String title, String description, User owner, Deck d) {
+        this.quizID = quizID;
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.deck = d;
+    }
 
     @Override
     public int getQuizID() {

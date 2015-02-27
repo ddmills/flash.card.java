@@ -25,6 +25,14 @@ public class Deck implements DeckInterface {
         this.cardList = cardList;
     }
     
+    public Deck (int deckID, String title, String description, User owner, HashMap<Integer, Card> cardList) {
+        this.deckID = deckID;
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.cardList = cardList;
+    }
+    
     @Override
     public int getDeckID() {
         return this.deckID;
