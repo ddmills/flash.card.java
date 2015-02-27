@@ -1,7 +1,7 @@
 package flash.card.java.db;
 
 public class DatabaseHelpers {
-    public String insert(String tableName, String... args)
+    public static String insert(String tableName, String... args)
     {
         String ret = "insert into " + tableName + " values ('";
         

@@ -62,7 +62,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         
         try {
             Statement stmt = connection.createStatement();
-            //stmt.executeUpdate(insert("User", t.getUserID(), t.getName(), t.getPassword()))
+            stmt.executeUpdate(DatabaseHelpers.insert("user", t.getUserID(), "teacher", t.getName(), t.getPassword()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
