@@ -19,4 +19,16 @@ public abstract class User {
     public AccessLevel access() {
         return this.accessLevel;
     }
+    
+    public String getUserID() {
+        return this.userID;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
 }

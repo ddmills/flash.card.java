@@ -1,8 +1,13 @@
 package flash.card.java.db;
 
-import java.sql.DriverManager;
-import java.sql.Connection;
 
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import flash.card.java.interfaces.DatabaseSupportInterface;
 import flash.card.java.model.Card;
@@ -54,6 +59,14 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     
     @Override
     public boolean putTeacher(Teacher t) {
+        
+        try {
+            Statement stmt = connection.createStatement();
+            //stmt.executeUpdate(insert("User", t.getUserID(), t.getName(), t.getPassword()))
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
         return true;
     }
 
@@ -104,5 +117,6 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         return connection;
     }
+    
 
 }
