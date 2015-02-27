@@ -39,10 +39,10 @@ public class Deck implements DeckInterface {
 
     @Override
     public boolean removeCard(Card c) {
-        
         return this.cardList.remove(c.getCardID(), c);
     }
     
+    @Override
     public boolean setOwner(User u) {
         if(owner == null) {
             this.owner = u;
@@ -50,11 +50,10 @@ public class Deck implements DeckInterface {
         } else {
             return false;
         }
-        
     }
 
+    @Override
     public Card getCard(int cardID) {
-        
         return this.cardList.get(cardID);
     }
 
