@@ -13,6 +13,12 @@ public class Student extends User implements StudentInterface {
         this.accessLevel = AccessLevel.student;
         this.quizList = new HashMap<Integer, Quiz>();
     }
+    
+    public Student(String userID, String pass, String name, HashMap<Integer, Quiz> quizList) {
+        super(userID, pass, name);
+        this.quizList = quizList;
+        this.accessLevel = AccessLevel.student;
+    }
 
     @Override
     public String getUserID() {
