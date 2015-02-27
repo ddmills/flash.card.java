@@ -18,7 +18,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private Connection connection = null;
     
     private DatabaseSupport() {
-        
+        connection = getConnection();
     }
     
     public static DatabaseSupport getInstance() {
@@ -97,9 +97,10 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("localhost", "root", "localhost");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "root");
         } catch (Exception e) {
             connection = null;
+            e.printStackTrace();
         }
         return connection;
     }
