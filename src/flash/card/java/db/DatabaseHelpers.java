@@ -19,7 +19,17 @@ public class DatabaseHelpers {
         return ret;
     }
     
-    public String update() {
-        return null;
+    public String update(String tableName, String keyCol, String key, String[] columns, String... args) {
+		String ret = "update " + tableName + " set ";
+        int i = 0;
+        for(String currentCol : columns) {
+        	ret = ret + currentCol + "` = " + args[i++] + ", `";
+        }
+        
+        ret = ret.substring(0, ret.length() - 3);
+        ret = ret + " where ";
+        
+        ret = ret + ";";
+        return ret;
     }
 }
