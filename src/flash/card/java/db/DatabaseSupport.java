@@ -60,9 +60,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     @Override
     public boolean putTeacher(Teacher t) {
         
+    	String[] columns = {"username", "type", "name", "password"};
+    	
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.insert("user", t.getUserID(), "teacher", t.getName(), t.getPassword());
+            String sql = DatabaseHelpers.insert("user", columns, t.getUserID(), "teacher", t.getName(), t.getPassword());
             System.out.println(sql);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
