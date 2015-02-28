@@ -52,22 +52,22 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean addAllStudentsToQuiz(String quizID) {
+    public boolean addAllStudentsToQuiz(int quizID) {
         return school.addAllStudentsToQuiz(quizID);
     }
 
     @Override
-    public boolean addStudentToQuiz(String userID, String quizID) {
+    public boolean addStudentToQuiz(String userID, int quizID) {
         return school.addStudentToQuiz(userID, quizID);
     }
 
     @Override
-    public boolean removeAllStudentsFromQuiz(String quizID) {
+    public boolean removeAllStudentsFromQuiz(int quizID) {
         return school.removeAllStudentsFromQuiz(quizID);
     }
 
     @Override
-    public boolean removeStudentFromQuiz(String userID, String quizID) {
+    public boolean removeStudentFromQuiz(String userID, int quizID) {
         return school.removeStudentFromQuiz(userID, quizID);
     }
 }

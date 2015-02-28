@@ -18,8 +18,11 @@ public class School implements SchoolInterface {
     public boolean createTeacher(String name, String userID, String pass) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.principal) {
-                Teacher t = new Teacher(name, userID, pass);
-                return db.putTeacher(t);
+            	if(db.getUser(userID) == null) {
+            		Teacher t = new Teacher(userID, pass, name);
+            		return db.putTeacher(t);
+            	}
+            	return false;
             }
         }
         return false;
@@ -107,14 +110,14 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean addAllStudentsToQuiz(String quizID) {
+    public boolean addAllStudentsToQuiz(int quizID) {
         // Add course object type
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean addStudentToQuiz(String userID, String quizID) {
+    public boolean addStudentToQuiz(String userID, int quizID) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);
@@ -129,13 +132,13 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean removeAllStudentsFromQuiz(String quizID) {
+    public boolean removeAllStudentsFromQuiz(int quizID) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean removeStudentFromQuiz(String userID, String quizID) {
+    public boolean removeStudentFromQuiz(String userID, int quizID) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);

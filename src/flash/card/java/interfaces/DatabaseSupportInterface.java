@@ -22,6 +22,6 @@ public interface DatabaseSupportInterface {
     Card putCard(Card c);
     boolean removeCard(Deck d, Card c);
     
-    Quiz getQuiz(String quizID);
+    Quiz getQuiz(int quizID);
     boolean putQuiz(Quiz q);
 }

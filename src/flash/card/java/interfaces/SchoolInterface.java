@@ -11,8 +11,8 @@ public interface SchoolInterface {
     boolean removeCard(int cardID, int deckID);
     boolean createQuiz (int quizID, String title, String description, int deckID);
     
-    boolean addAllStudentsToQuiz (String quizID);
-    boolean addStudentToQuiz (String userID, String quizID);
-    boolean removeAllStudentsFromQuiz (String quizID);
-    boolean removeStudentFromQuiz (String userID, String quizID);
+    boolean addAllStudentsToQuiz (int quizID);
+    boolean addStudentToQuiz (String userID, int quizID);
+    boolean removeAllStudentsFromQuiz (int quizID);
+    boolean removeStudentFromQuiz (String userID, int quizID);
 }
