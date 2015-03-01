@@ -22,18 +22,21 @@ public class Student extends User implements StudentInterface {
 
     @Override
     public String getUserID() {
-        
-        return this.userID;
+        return userID;
     }
 
     @Override
     public boolean addQuiz(Quiz q) {
-        this.quizList.put(q.getQuizID(), q);
+        quizList.put(q.getQuizID(), q);
         return true;
     }
 
     @Override
     public boolean removeQuiz(Quiz q) {
-        return this.quizList.remove(q.getQuizID(), q);
+        return quizList.remove(q.getQuizID(), q);
+    }
+
+    public HashMap<Integer, Quiz> getQuizzes() {
+        return quizList;
     }
 }

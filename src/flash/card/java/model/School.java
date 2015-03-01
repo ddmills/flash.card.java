@@ -123,7 +123,6 @@ public class School implements SchoolInterface {
                 Student s = db.getStudent(userID);
                 Quiz q = db.getQuiz(quizID);
                 s.addQuiz(q);
-        
                 return this.db.putStudent(s);
             }
         }

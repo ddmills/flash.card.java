@@ -17,7 +17,6 @@ CREATE TABLE `user` (
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
-
 ```
 
 ### deck table:
@@ -65,6 +64,20 @@ CREATE TABLE `quiz` (
 	CONSTRAINT `FK___deck` FOREIGN KEY (`deckID`) REFERENCES `deck` (`deckID`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+```
+### quiz-student relational table
+```mysql
+CREATE TABLE `quiz_relation` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `quizID` INT(11) NOT NULL DEFAULT '0',
+    `studentID` VARCHAR(50) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    INDEX `FK__quiz` (`quizID`),
+    INDEX `FK__user` (`studentID`),
+    CONSTRAINT `FK__quiz` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `FK__user` FOREIGN KEY (`studentID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
 ENGINE=InnoDB;
 ```
 

@@ -19,9 +19,6 @@ public interface DatabaseSupportInterface {
     Deck getDeck(int deckID);
     boolean putDeck(Deck d);
     
-    Card putCard(Card c);
-    boolean removeCard(Deck d, Card c);
-    
     Quiz getQuiz(int quizID);
     boolean putQuiz(Quiz q);
 }

@@ -5,17 +5,17 @@ public class DatabaseHelpers {
         String ret = "insert into " + tableName + " (`";
         
         for(String currentCol : columns) {
-        	ret = ret + currentCol + "`, `";
+            ret += currentCol + "`, `";
         }
         
         ret = ret.substring(0, ret.length() - 3);
-        ret = ret + ") values (\"";
+        ret += ") values (\"";
         
         for (String currentArg : args) {
             ret = ret + currentArg + "\", \"";
         }
         ret = ret.substring(0, ret.length() - 3);
-        ret = ret + ");";
+        ret += ");";
         return ret;
     }
     
@@ -23,18 +23,17 @@ public class DatabaseHelpers {
 		String ret = "update " + tableName + " set `";
         int i = 0;
         for(String currentCol : columns) {
-        	ret = ret + currentCol + "` = \"" + args[i++] + "\", `";
+            ret += currentCol + "` = \"" + args[i++] + "\", `";
         }
         
         ret = ret.substring(0, ret.length() - 3);
-        ret = ret + " where `" + keyCol + "` = \"" + key + "\"";
+        ret += " where `" + keyCol + "` = \"" + key + "\"";
         
-        ret = ret + ";";
+        ret += ";";
         return ret;
     }
     
     public static String select(String tableName, String keyCol, String key) {
-    	String ret = "select * from " + tableName + " where " + keyCol + " = \"" + key + "\"";
-    	return ret;
+        return "select * from " + tableName + " where " + keyCol + " = \"" + key + "\"";
     }
 }

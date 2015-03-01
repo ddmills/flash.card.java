@@ -20,6 +20,14 @@ public class Deck implements DeckInterface {
         this.cardList = new HashMap<Integer, Card>();
     }
     
+    public Deck (int deckID, String title, String description, User owner) {
+        this.deckID = deckID;
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.cardList = new HashMap<Integer, Card>();
+    }
+    
     public Deck (int deckID, HashMap<Integer, Card> cardList) {
         this.deckID = deckID;
         this.cardList = cardList;
@@ -63,6 +71,22 @@ public class Deck implements DeckInterface {
     @Override
     public Card getCard(int cardID) {
         return this.cardList.get(cardID);
+    }
+    
+    public HashMap<Integer, Card> getCards() {
+        return cardList;
+    }
+
+    public String getOwnerID() {
+        return owner.getUserID();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
 }
