@@ -7,6 +7,7 @@ import flash.card.java.interfaces.CourseInterface;
 public class Course implements CourseInterface {
 
 	private HashMap<String, Student> studentList;
+	private Teacher owner;
 	private String courseName;
 	private int courseID;
 	
@@ -14,16 +15,31 @@ public class Course implements CourseInterface {
 		this.studentList = new HashMap<String, Student>();
 		this.courseName = courseName;
 		this.courseID = courseID;
+		
 	}
 	
-	public Course (int courseID, String courseName, HashMap<String, Student> studentList) {
+	public Course (int courseID, Teacher owner, String courseName, HashMap<String, Student> studentList) {
 		this.courseID = courseID;
 		this.studentList = studentList;
 		this.courseName = courseName;
+		this.owner = owner;
 	}
 	
 	public int getCourseID() {
 		return this.courseID;
+	}
+	
+	public Teacher getOwner() {
+		return this.owner;
+	}
+	
+	public boolean setOwner(Teacher owner) {
+		if(this.owner == null) {
+			this.owner = owner;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String getCourseName() {
