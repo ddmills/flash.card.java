@@ -35,7 +35,8 @@ public class Student extends User implements StudentInterface {
     public boolean removeQuiz(Quiz q) {
         return quizList.remove(q.getQuizID(), q);
     }
-
+    
+    @Override
     public HashMap<Integer, Quiz> getQuizzes() {
         return quizList;
     }
