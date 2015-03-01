@@ -240,8 +240,22 @@ public class DatabaseSupport implements DatabaseSupportInterface {
 
     @Override
     public boolean putQuiz(Quiz q) {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Statement stmt = connection.createStatement();
+            String sql;
+            Quiz check = this.getQuiz(q.getQuizID());
+            if(check == null) {
+                sql = DatabaseHelpers.insert("quiz", quizColumns, "" + q.getQuizID(), "" + q.getDeck().getDeckID(), q.getOwner().getUserID(), q.getTitle(), q.getDescription());
+            } else {
+                sql = DatabaseHelpers.update("quiz", quizColumns[0], "" + q.getQuizID(), quizColumns, "" + q.getQuizID(), "" + q.getDeck().getDeckID(), q.getOwner().getUserID(), q.getTitle(), q.getDescription());
+            }
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
     }
     
     private Connection getConnection() {

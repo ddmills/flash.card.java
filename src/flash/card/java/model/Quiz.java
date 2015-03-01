@@ -42,5 +42,19 @@ public class Quiz implements QuizInterface{
         
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
     
+    public User getOwner() {
+        return owner;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

@@ -18,11 +18,10 @@ public class School implements SchoolInterface {
     public boolean createTeacher(String name, String userID, String pass) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.principal) {
-            	if(db.getUser(userID) == null) {
-            		Teacher t = new Teacher(userID, pass, name);
-            		return db.putTeacher(t);
-            	}
-            	return false;
+                if(db.getUser(userID) == null) {
+                    Teacher t = new Teacher(userID, pass, name);
+                    return db.putTeacher(t);
+                }
             }
         }
         return false;
@@ -100,8 +99,7 @@ public class School implements SchoolInterface {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                Quiz q = new Quiz(quizID, title, description, d);
-                q.setOwner(this.user.get());
+                Quiz q = new Quiz(quizID, title, description, this.user.get(), d);
                 return db.putQuiz(q);
             }
         }
@@ -127,7 +125,6 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-        
     }
 
     @Override
@@ -143,12 +140,10 @@ public class School implements SchoolInterface {
                 Student s = db.getStudent(userID);
                 Quiz q = db.getQuiz(quizID);
                 s.removeQuiz(q);
-        
                 return this.db.putStudent(s);
             }
         }
         return false;
-        
     }
 
 }
