@@ -18,11 +18,13 @@ public class Card implements CardInterface {
     public int getCardID() {
         return this.cardID;
     }
-
+    
+    @Override
     public String getFront() {
         return front;
     }
     
+    @Override
     public String getBack() {
         return back;
     }

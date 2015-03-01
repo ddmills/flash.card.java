@@ -27,7 +27,6 @@ public class Quiz implements QuizInterface{
 
     @Override
     public int getQuizID() {
-        
         return this.quizID;
     }
 
@@ -41,19 +40,23 @@ public class Quiz implements QuizInterface{
         }
         
     }
-
+    
+    @Override
     public Deck getDeck() {
         return deck;
     }
     
+    @Override
     public User getOwner() {
         return owner;
     }
     
+    @Override
     public String getDescription() {
         return description;
     }
-
+    
+    @Override
     public String getTitle() {
         return title;
     }

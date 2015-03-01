@@ -73,18 +73,22 @@ public class Deck implements DeckInterface {
         return this.cardList.get(cardID);
     }
     
+    @Override
     public HashMap<Integer, Card> getCards() {
         return cardList;
     }
-
+    
+    @Override
     public String getOwnerID() {
         return owner.getUserID();
     }
-
+    
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
