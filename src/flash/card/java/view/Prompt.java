@@ -106,9 +106,26 @@ public class Prompt {
         case "create quiz":
             attempt(school.createQuiz(askInt("quizID"), ask("title"), ask("description"), askInt("deckID")));
             break;
+        case "create course":
+        	attempt(school.createCourse(askInt("courseID"), ask("title")));
+        	break;
         case "add student to quiz":
             attempt(school.addStudentToQuiz(ask("student username"), askInt("quiz id")));
             break;
+        case "add student to course":
+        	break;
+        case "help":
+        case "commands":
+    		println("- login");
+    		println("- logout");
+    		println("- create teacher");
+    		println("- create student");
+    		println("- create deck");
+    		println("- create card");
+    		println("- create quiz");
+    		println("- add student to quiz");
+        	break;
+        	
         case "exit":
             running = false;
             println("goodbye!");

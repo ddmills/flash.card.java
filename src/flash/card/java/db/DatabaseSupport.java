@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import flash.card.java.interfaces.DatabaseSupportInterface;
 import flash.card.java.model.Card;
+import flash.card.java.model.Course;
 import flash.card.java.model.Deck;
 import flash.card.java.model.Principal;
 import flash.card.java.model.Quiz;
@@ -29,6 +30,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private String[] cardColumns = {"cardID", "deckID", "front", "back"};
     private String[] quizColumns = {"quizID", "deckID", "ownerID", "title", "description"};
     private String[] deckColumns = {"deckID", "ownerID", "title", "description"};
+    private String[] courseColumns = {"courseID", "title"};
     private String[] quizRelationsColumns = {"quizID", "studentID"};
     
     
@@ -268,6 +270,27 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         return connection;
     }
+
+	@Override
+	public boolean putCourse(Course c) {
+		//TODO: student list put
+		try {
+            Statement stmt = connection.createStatement();
+            String sql;
+            Quiz check = this.getQuiz(c.getCourseID());
+            if(check == null) {
+                sql = DatabaseHelpers.insert("course", courseColumns, "" + c.getCourseID(), c.getCourseName());
+            } else {
+                sql = DatabaseHelpers.update("course", courseColumns[0], "" + c.getCourseID(), courseColumns, "" + c.getCourseID(), c.getCourseName() );
+            }
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+	}
     
 
 }
