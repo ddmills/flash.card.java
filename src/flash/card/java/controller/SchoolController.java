@@ -70,4 +70,9 @@ public class SchoolController implements SchoolControllerInterface {
     public boolean removeStudentFromQuiz(String userID, int quizID) {
         return school.removeStudentFromQuiz(userID, quizID);
     }
+
+	@Override
+	public boolean createCourse(int courseID, String title) {
+		return school.createCourse(courseID, title);
+	}
 }

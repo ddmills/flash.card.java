@@ -1,6 +1,7 @@
 package flash.card.java.interfaces;
 
 import flash.card.java.model.Card;
+import flash.card.java.model.Course;
 import flash.card.java.model.Deck;
 import flash.card.java.model.Principal;
 import flash.card.java.model.Quiz;
@@ -15,6 +16,7 @@ public interface DatabaseSupportInterface {
     boolean putStudent(Student s);
     boolean putTeacher(Teacher t);
     boolean putPrincipal(Principal p);
+    boolean putCourse(Course c);
     
     Deck getDeck(int deckID);
     boolean putDeck(Deck d);

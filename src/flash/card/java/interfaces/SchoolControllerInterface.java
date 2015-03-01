@@ -10,6 +10,7 @@ public interface SchoolControllerInterface {
     boolean createCard (int cardID, String front, String back, int deckID);
     boolean removeCard(int cardID, int deckID);
     boolean createQuiz (int quizID, String title, String description, int deckID);
+    boolean createCourse (int courseID, String title);
     
     boolean addAllStudentsToQuiz (int quizID);
     boolean addStudentToQuiz (String userID, int quizID);
