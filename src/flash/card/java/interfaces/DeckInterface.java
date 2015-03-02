@@ -7,8 +7,8 @@ import flash.card.java.model.User;
 
 public interface DeckInterface {
     public int getDeckID ();
-    public boolean addCard (int cardID, String front, String back);
-    public boolean removeCard (Card c);
+    public boolean createCard (int cardID, String front, String back);
+    public boolean deleteCard (Card c);
     public boolean setOwner (User u);
     public Card getCard(int cardID);
     public HashMap<Integer, Card> getCards();

@@ -42,8 +42,8 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean removeCard(int cardID, int deckID) {
-        return school.removeCard(cardID, deckID);
+    public boolean deleteCard(int cardID, int deckID) {
+        return school.deleteCard(cardID, deckID);
     }
 
     @Override
@@ -52,23 +52,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean addAllStudentsToQuiz(int quizID) {
-        return school.addAllStudentsToQuiz(quizID);
+    public boolean addQuizToStudent(String userID, int quizID) {
+        return school.addQuizToStudent(userID, quizID);
     }
 
     @Override
-    public boolean addStudentToQuiz(String userID, int quizID) {
-        return school.addStudentToQuiz(userID, quizID);
-    }
-
-    @Override
-    public boolean removeAllStudentsFromQuiz(int quizID) {
-        return school.removeAllStudentsFromQuiz(quizID);
-    }
-
-    @Override
-    public boolean removeStudentFromQuiz(String userID, int quizID) {
-        return school.removeStudentFromQuiz(userID, quizID);
+    public boolean removeQuizFromStudent(String userID, int quizID) {
+        return school.removeQuizFromStudent(userID, quizID);
     }
 
     @Override

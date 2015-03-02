@@ -169,7 +169,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
                 String cardsql = "select * from card where deckID = \"" + d.getDeckID() + "\";";
                 ResultSet cards = cardstmt.executeQuery(cardsql);
                 while (cards.next()) {
-                    d.addCard(cards.getInt(1), cards.getString(3), cards.getString(4));
+                    d.createCard(cards.getInt(1), cards.getString(3), cards.getString(4));
                 }
                 return d;
             }

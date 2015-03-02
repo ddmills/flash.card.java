@@ -72,7 +72,7 @@ public class School implements SchoolInterface {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                d.addCard(cardID, front, back);
+                d.createCard(cardID, front, back);
                 return db.putDeck(d);
             }
         }
@@ -81,12 +81,12 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean removeCard(int cardID, int deckID) {
+    public boolean deleteCard(int cardID, int deckID) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
                 Card c = d.getCard(cardID);
-                d.removeCard(c);
+                d.deleteCard(c);
                 return db.putDeck(d);
             }
         }
@@ -108,14 +108,7 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean addAllStudentsToQuiz(int quizID) {
-        // Add course object type
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean addStudentToQuiz(String userID, int quizID) {
+    public boolean addQuizToStudent(String userID, int quizID) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);
@@ -128,13 +121,7 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean removeAllStudentsFromQuiz(int quizID) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean removeStudentFromQuiz(String userID, int quizID) {
+    public boolean removeQuizFromStudent(String userID, int quizID) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);
@@ -146,7 +133,6 @@ public class School implements SchoolInterface {
         return false;
     }
 
-
     @Override
     public boolean createCourse(int courseID, String title) {
         if(user.isSet()) {
@@ -157,5 +143,4 @@ public class School implements SchoolInterface {
         }
         return false;
     }
-
 }

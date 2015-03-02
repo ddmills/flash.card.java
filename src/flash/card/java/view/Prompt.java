@@ -109,8 +109,8 @@ public class Prompt {
         case "create course":
             attempt(school.createCourse(askInt("courseID"), ask("title")));
             break;
-        case "add student to quiz":
-            attempt(school.addStudentToQuiz(ask("student username"), askInt("quiz id")));
+        case "add quiz to student":
+            attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
             break;
         case "add student to course":
             break;
@@ -123,9 +123,8 @@ public class Prompt {
             println("- create deck");
             println("- create card");
             println("- create quiz");
-            println("- add student to quiz");
+            println("- add quiz to student");
             break;
-            
         case "exit":
             running = false;
             println("goodbye!");
@@ -133,7 +132,7 @@ public class Prompt {
         case "":
             break;
         default:
-            println("command not recognized");
+            println("command not recognized - use \"help\" for a list of commands");
         }
     }
     

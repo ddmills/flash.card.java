@@ -47,14 +47,14 @@ public class Deck implements DeckInterface {
     }
 
     @Override
-    public boolean addCard(int cardID, String front, String back) {
+    public boolean createCard(int cardID, String front, String back) {
         Card c = new Card(cardID, front, back);
         this.cardList.put(c.getCardID(), c);
         return true;
     }
 
     @Override
-    public boolean removeCard(Card c) {
+    public boolean deleteCard(Card c) {
         return this.cardList.remove(c.getCardID(), c);
     }
     

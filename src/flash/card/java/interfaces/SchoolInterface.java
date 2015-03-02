@@ -8,12 +8,10 @@ public interface SchoolInterface {
     
     boolean createDeck (int deckID, String title, String description);
     boolean createCard (int cardID, String front, String back, int deckID);
-    boolean removeCard(int cardID, int deckID);
+    boolean deleteCard(int cardID, int deckID);
     boolean createQuiz (int quizID, String title, String description, int deckID);
     boolean createCourse (int courseID, String title);
     
-    boolean addAllStudentsToQuiz (int quizID);
-    boolean addStudentToQuiz (String userID, int quizID);
-    boolean removeAllStudentsFromQuiz (int quizID);
-    boolean removeStudentFromQuiz (String userID, int quizID);
+    boolean addQuizToStudent (String userID, int quizID);
+    boolean removeQuizFromStudent (String userID, int quizID);
 }
