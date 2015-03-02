@@ -147,15 +147,15 @@ public class School implements SchoolInterface {
     }
 
 
-	@Override
-	public boolean createCourse(int courseID, String title) {
-		if(user.isSet()) {
+    @Override
+    public boolean createCourse(int courseID, String title) {
+        if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-				Course c = new Course(courseID, title);
-				return this.db.putCourse(c);
+                Course c = new Course(courseID, title);
+                return this.db.putCourse(c);
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

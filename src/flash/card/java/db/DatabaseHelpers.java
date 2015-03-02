@@ -20,7 +20,7 @@ public class DatabaseHelpers {
     }
     
     public static String update(String tableName, String keyCol, String key, String[] columns, String... args) {
-		String ret = "update " + tableName + " set `";
+        String ret = "update " + tableName + " set `";
         int i = 0;
         for(String currentCol : columns) {
             ret += currentCol + "` = \"" + args[i++] + "\", `";

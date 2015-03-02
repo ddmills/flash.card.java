@@ -271,10 +271,10 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         return connection;
     }
 
-	@Override
-	public boolean putCourse(Course c) {
-		//TODO: student list put
-		try {
+    @Override
+    public boolean putCourse(Course c) {
+        //TODO: student list put
+        try {
             Statement stmt = connection.createStatement();
             String sql;
             Quiz check = this.getQuiz(c.getCourseID());
@@ -290,7 +290,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         
         return true;
-	}
+    }
     
 
 }

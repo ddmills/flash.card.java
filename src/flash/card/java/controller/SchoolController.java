@@ -71,8 +71,8 @@ public class SchoolController implements SchoolControllerInterface {
         return school.removeStudentFromQuiz(userID, quizID);
     }
 
-	@Override
-	public boolean createCourse(int courseID, String title) {
-		return school.createCourse(courseID, title);
-	}
+    @Override
+    public boolean createCourse(int courseID, String title) {
+        return school.createCourse(courseID, title);
+    }
 }
