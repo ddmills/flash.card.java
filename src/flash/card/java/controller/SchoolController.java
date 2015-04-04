@@ -65,4 +65,28 @@ public class SchoolController implements SchoolControllerInterface {
     public boolean createCourse(int courseID, String title) {
         return school.createCourse(courseID, title);
     }
+
+    @Override
+    public boolean editCourseName(int courseID, String courseName)
+    {
+        return school.editCourseName(courseID, courseName);
+    }
+
+    @Override
+    public boolean editQuizTitle(int quizID, String quizTitle)
+    {
+        return school.editQuizTitle(quizID, quizTitle);
+    }
+
+    @Override
+    public boolean addStudentToCourse(int courseID, String studentID)
+    {
+        return school.addStudentToCourse(courseID, studentID);
+    }
+
+    @Override
+    public boolean removeStudentFromCourse(int courseID, String studentID)
+    {
+        return school.removeStudentFromCourse(courseID, studentID);
+    }
 }

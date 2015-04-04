@@ -143,4 +143,76 @@ public class School implements SchoolInterface {
         }
         return false;
     }
+
+
+    @Override
+    public boolean editCourseName(int courseID, String courseName)
+    {
+        Course c = db.getCourse(courseID);
+        
+        if(c == null)
+        {
+            return false;
+        }
+        else
+        {
+            c.setCourseName(courseName);
+            return db.putCourse(c);
+        }
+    }
+
+
+    @Override
+    public boolean editQuizTitle(int quizID, String quizTitle)
+    {
+        Quiz q = db.getQuiz(quizID);
+        if(q == null)
+        {
+            //quiz does not exist
+            return false;
+        }
+        else
+        {
+            return q.setQuizTitle(quizTitle);
+        }
+    }
+
+
+    @Override
+    public boolean addStudentToCourse(int courseID, String studentID)
+    {
+        Course c = db.getCourse(courseID);
+        Student s = db.getStudent(studentID);
+        
+        if(c.addStudentToCourse(s))
+        {
+            //ok
+        }
+        else
+        {
+            //throw error up to console
+            return false;
+        }
+        
+        return db.putCourse(c);
+    }
+
+
+    @Override
+    public boolean removeStudentFromCourse(int courseID, String studentID)
+    {
+        Course c = db.getCourse(courseID);
+        Student s = db.getStudent(studentID);
+        
+        if(c.removeStudentFromCourse(s))
+        {
+            //ok
+        }
+        else
+        {
+            //throw error up to console
+            return false;
+        }
+        return db.putCourse(c);
+    }
 }

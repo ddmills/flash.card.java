@@ -277,7 +277,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql;
-            Quiz check = this.getQuiz(c.getCourseID());
+            Course check = this.getCourse(c.getCourseID());
             if(check == null) {
                 sql = DatabaseHelpers.insert("course", courseColumns, "" + c.getCourseID(), c.getCourseName());
             } else {
@@ -290,6 +290,26 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         
         return true;
+    }
+
+    @Override
+    public Course getCourse(int courseID)
+    {
+        // TODO add student List functionality 
+        try 
+        {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.select("course", courseColumns[0], "" + courseID);
+            ResultSet results = stmt.executeQuery(sql);
+            if(results.next()) {
+                return new Course(results.getInt(0), results.getString(1));
+            }
+        }
+        catch (SQLException e) 
+        {
+                e.printStackTrace();
+        }
+        return null;
     }
     
 

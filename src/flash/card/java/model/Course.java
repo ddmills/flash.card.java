@@ -58,4 +58,22 @@ public class Course implements CourseInterface {
             return false;
         }
     }
+
+    @Override
+    public boolean setCourseName(String courseName)
+    {
+        this.courseName = courseName;
+        return true;
+    }
+
+    @Override
+    public boolean removeStudentFromCourse(Student s)
+    {
+        if(studentList.containsKey(s.getUserID())) {
+            studentList.remove(s.getUserID());
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

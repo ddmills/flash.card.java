@@ -60,4 +60,11 @@ public class Quiz implements QuizInterface{
     public String getTitle() {
         return title;
     }
+
+    @Override
+    public boolean setQuizTitle(String quizTitle)
+    {
+        this.title = quizTitle;
+        return true;
+    }
 }

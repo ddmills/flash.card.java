@@ -1,17 +1,21 @@
 package flash.card.java.interfaces;
 
 public interface SchoolInterface {
+    //Iteration 1:
     boolean createTeacher (String name, String userID, String pass);
     boolean createStudent (String name, String userID, String pass);
     boolean login (String userID, String pass);
     boolean logout ();
-    
     boolean createDeck (int deckID, String title, String description);
     boolean createCard (int cardID, String front, String back, int deckID);
     boolean deleteCard(int cardID, int deckID);
     boolean createQuiz (int quizID, String title, String description, int deckID);
     boolean createCourse (int courseID, String title);
-    
     boolean addQuizToStudent (String userID, int quizID);
     boolean removeQuizFromStudent (String userID, int quizID);
+    //Iteration 2:
+    boolean editCourseName(int courseID, String courseName);
+    boolean editQuizTitle(int quizID, String quizTitle);
+    boolean addStudentToCourse(int courseID, String studentID);
+    boolean removeStudentFromCourse(int courseID, String studentID);
 }

@@ -113,6 +113,16 @@ public class Prompt {
             attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
             break;
         case "add student to course":
+            attempt(school.addStudentToCourse(askInt("courseID"), ask("student id")));
+            break;
+        case "remove student from course":
+            attempt(school.removeStudentFromCourse(askInt("courseID"), ask("student id")));
+            break;
+        case "edit quiz title":
+            attempt(school.editQuizTitle(askInt("quizID"), ask("new quiz title")));
+            break;
+        case "edit course name":
+            attempt(school.editCourseName(askInt("courseID"), ask("new course name")));
             break;
         case "help":
         case "commands":
@@ -123,7 +133,12 @@ public class Prompt {
             println("- create deck");
             println("- create card");
             println("- create quiz");
+            println("- create course");
             println("- add quiz to student");
+            println("- add student to course");
+            println("- remove student from course");
+            println("- edit quiz title");
+            println("- edit course name");
             break;
         case "exit":
             running = false;
