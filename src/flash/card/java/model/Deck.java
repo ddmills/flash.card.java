@@ -12,14 +12,14 @@ public class Deck implements DeckInterface {
     private String description;
     private HashMap<Integer, Card> cardList;
     private User owner;
-    
+
     public Deck (int deckID, String title, String description) {
         this.deckID = deckID;
         this.title = title;
         this.description = description;
         this.cardList = new HashMap<Integer, Card>();
     }
-    
+
     public Deck (int deckID, String title, String description, User owner) {
         this.deckID = deckID;
         this.title = title;
@@ -27,12 +27,12 @@ public class Deck implements DeckInterface {
         this.owner = owner;
         this.cardList = new HashMap<Integer, Card>();
     }
-    
+
     public Deck (int deckID, HashMap<Integer, Card> cardList) {
         this.deckID = deckID;
         this.cardList = cardList;
     }
-    
+
     public Deck (int deckID, String title, String description, User owner, HashMap<Integer, Card> cardList) {
         this.deckID = deckID;
         this.title = title;
@@ -40,7 +40,7 @@ public class Deck implements DeckInterface {
         this.owner = owner;
         this.cardList = cardList;
     }
-    
+
     @Override
     public int getDeckID() {
         return this.deckID;
@@ -57,7 +57,7 @@ public class Deck implements DeckInterface {
     public boolean deleteCard(Card c) {
         return this.cardList.remove(c.getCardID(), c);
     }
-    
+
     @Override
     public boolean setOwner(User u) {
         if(owner == null) {
@@ -72,17 +72,17 @@ public class Deck implements DeckInterface {
     public Card getCard(int cardID) {
         return this.cardList.get(cardID);
     }
-    
+
     @Override
     public HashMap<Integer, Card> getCards() {
         return cardList;
     }
-    
+
     @Override
     public String getOwnerID() {
         return owner.getUserID();
     }
-    
+
     @Override
     public String getTitle() {
         return title;
@@ -91,6 +91,12 @@ public class Deck implements DeckInterface {
     @Override
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public boolean userOwnsDeck(User u)
+    {
+        return u.getUserID() == this.getOwnerID();
     }
 
 }

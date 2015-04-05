@@ -9,14 +9,14 @@ public class Quiz implements QuizInterface{
     private User owner;
     private String title;
     private String description;
-    
+
     public Quiz(int quizID, String title, String description, Deck d) {
         this.quizID = quizID;
         this.title = title;
         this.description = description;
         this.deck = d;
     }
-    
+
     public Quiz(int quizID, String title, String description, User owner, Deck d) {
         this.quizID = quizID;
         this.title = title;
@@ -35,27 +35,27 @@ public class Quiz implements QuizInterface{
         if(this.owner == null) {
             this.owner = u;
             return true;
-        } else { 
+        } else {
             return false;
         }
-        
+
     }
-    
+
     @Override
     public Deck getDeck() {
         return deck;
     }
-    
+
     @Override
     public User getOwner() {
         return owner;
     }
-    
+
     @Override
     public String getDescription() {
         return description;
     }
-    
+
     @Override
     public String getTitle() {
         return title;
@@ -66,5 +66,11 @@ public class Quiz implements QuizInterface{
     {
         this.title = quizTitle;
         return true;
+    }
+
+    @Override
+    public boolean userOwnsQuiz(User u)
+    {
+        return u.getUserID() == this.getOwner().getUserID();
     }
 }

@@ -6,11 +6,11 @@ import flash.card.java.model.School;
 public class SchoolController implements SchoolControllerInterface {
 
     private School school;
-    
+
     public SchoolController() {
         school = new School();
     }
-    
+
     @Override
     public boolean createTeacher(String name, String userID, String pass) {
         return school.createTeacher(name, userID, pass);
@@ -88,5 +88,35 @@ public class SchoolController implements SchoolControllerInterface {
     public boolean removeStudentFromCourse(int courseID, String studentID)
     {
         return school.removeStudentFromCourse(courseID, studentID);
+    }
+
+    @Override
+    public boolean deleteStudent(String studentID)
+    {
+        return school.deleteStudent(studentID);
+    }
+
+    @Override
+    public boolean deleteCourse(int courseID)
+    {
+        return school.deleteCourse(courseID);
+    }
+
+    @Override
+    public boolean deleteTeacher(String teacherID)
+    {
+        return school.deleteTeacher(teacherID);
+    }
+
+    @Override
+    public boolean deleteDeck(int deckID)
+    {
+        return school.deleteDeck(deckID);
+    }
+
+    @Override
+    public boolean deleteQuiz(int quizID)
+    {
+        return school.deleteQuiz(quizID);
     }
 }

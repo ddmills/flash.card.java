@@ -25,19 +25,19 @@ import flash.card.java.model.User;
 public class DatabaseSupport implements DatabaseSupportInterface {
     private static DatabaseSupport instance = null;
     private Connection connection = null;
-    
+
     private String[] userColumns = {"username", "type", "name", "password"};
     private String[] cardColumns = {"cardID", "deckID", "front", "back"};
     private String[] quizColumns = {"quizID", "deckID", "ownerID", "title", "description"};
     private String[] deckColumns = {"deckID", "ownerID", "title", "description"};
     private String[] courseColumns = {"courseID", "title"};
     private String[] quizRelationsColumns = {"quizID", "studentID"};
-    
-    
+
+
     private DatabaseSupport() {
         connection = getConnection();
     }
-    
+
     public static DatabaseSupport getInstance() {
         if (instance == null) {
             instance = new DatabaseSupport();
@@ -69,7 +69,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
 
     @Override
     public Student getStudent(String studentID) {
-        
+
         Student student = (Student) getUser(studentID);
         try {
             Statement stmt = connection.createStatement();
@@ -84,7 +84,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return null;
     }
 
@@ -100,7 +100,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
                 sql = DatabaseHelpers.update("user", userColumns[0], s.getUserID(), userColumns, s.getUserID(), "student", s.getName(), s.getPassword());
             }
             stmt.executeUpdate(sql);
-            
+
             Statement stmtClean = connection.createStatement();
             sql = "delete from quiz_relation where studentID = \"" + s.getUserID() + "\";";
             stmtClean.execute(sql);
@@ -116,7 +116,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         return true;
     }
-    
+
     @Override
     public boolean putPrincipal(Principal p) {
         try {
@@ -135,7 +135,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         return true;
     }
-    
+
     @Override
     public boolean putTeacher(Teacher t) {
         try {
@@ -191,7 +191,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
                 sql = DatabaseHelpers.update("deck", deckColumns[0], "" + d.getDeckID(), deckColumns, "" + d.getDeckID(), d.getOwnerID(), d.getTitle(), d.getDescription());
             }
             stmt.executeUpdate(sql);
-            
+
             Statement stmtClean = connection.createStatement();
             sql = "delete from card where deckID = \"" + d.getDeckID() + "\";";
             stmtClean.execute(sql);
@@ -208,7 +208,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         }
         return true;
     }
-    
+
     public Card getCard(int cardID) {
         try {
             Statement stmt = connection.createStatement();
@@ -256,10 +256,10 @@ public class DatabaseSupport implements DatabaseSupportInterface {
             e.printStackTrace();
             return false;
         }
-        
+
         return true;
     }
-    
+
     private Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -288,15 +288,15 @@ public class DatabaseSupport implements DatabaseSupportInterface {
             e.printStackTrace();
             return false;
         }
-        
+
         return true;
     }
 
     @Override
     public Course getCourse(int courseID)
     {
-        // TODO add student List functionality 
-        try 
+        // TODO add student List functionality
+        try
         {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.select("course", courseColumns[0], "" + courseID);
@@ -305,12 +305,83 @@ public class DatabaseSupport implements DatabaseSupportInterface {
                 return new Course(results.getInt(0), results.getString(1));
             }
         }
-        catch (SQLException e) 
+        catch (SQLException e)
         {
                 e.printStackTrace();
         }
         return null;
     }
-    
+
+    @Override
+    public Teacher getTeacher(String teacherID)
+    {
+        return (Teacher) getUser(teacherID);
+    }
+
+    @Override
+    public boolean deleteDeck(Deck d)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.delete("Deck", deckColumns[0], "" + d.getDeckID());
+            stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteQuiz(Quiz q)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.delete("Quiz", quizColumns[0], "" + q.getQuizID());
+            stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteCourse(Course c)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.delete("Course", courseColumns[0], "" + c.getCourseID());
+            stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteStudent(Student s)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.delete("user", userColumns[0], s.getUserID());
+            stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteTeacher(Teacher t)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = DatabaseHelpers.delete("user", userColumns[0], t.getUserID());
+            stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }

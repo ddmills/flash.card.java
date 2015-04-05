@@ -7,13 +7,13 @@ public class School implements SchoolInterface {
 
     CurrentUser user;
     DatabaseSupport db = null;
-    
+
     public School() {
         this.user = new CurrentUser();
         this.db = DatabaseSupport.getInstance();
     }
-    
-    
+
+
     @Override
     public boolean createTeacher(String name, String userID, String pass) {
         if (user.isSet()) {
@@ -30,7 +30,7 @@ public class School implements SchoolInterface {
     @Override
     public boolean createStudent(String name, String userID, String pass) {
         Student s = new Student(name, userID, pass);
-        
+
         return this.db.putStudent(s);
     }
 
@@ -64,7 +64,7 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-        
+
     }
 
     @Override
@@ -77,7 +77,7 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-        
+
     }
 
     @Override
@@ -91,7 +91,6 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-        
     }
 
     @Override
@@ -104,7 +103,7 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-        
+
     }
 
     @Override
@@ -144,12 +143,11 @@ public class School implements SchoolInterface {
         return false;
     }
 
-
     @Override
     public boolean editCourseName(int courseID, String courseName)
     {
         Course c = db.getCourse(courseID);
-        
+
         if(c == null)
         {
             return false;
@@ -160,7 +158,6 @@ public class School implements SchoolInterface {
             return db.putCourse(c);
         }
     }
-
 
     @Override
     public boolean editQuizTitle(int quizID, String quizTitle)
@@ -177,13 +174,12 @@ public class School implements SchoolInterface {
         }
     }
 
-
     @Override
     public boolean addStudentToCourse(int courseID, String studentID)
     {
         Course c = db.getCourse(courseID);
         Student s = db.getStudent(studentID);
-        
+
         if(c.addStudentToCourse(s))
         {
             //ok
@@ -193,17 +189,16 @@ public class School implements SchoolInterface {
             //throw error up to console
             return false;
         }
-        
+
         return db.putCourse(c);
     }
-
 
     @Override
     public boolean removeStudentFromCourse(int courseID, String studentID)
     {
         Course c = db.getCourse(courseID);
         Student s = db.getStudent(studentID);
-        
+
         if(c.removeStudentFromCourse(s))
         {
             //ok
@@ -214,5 +209,73 @@ public class School implements SchoolInterface {
             return false;
         }
         return db.putCourse(c);
+    }
+
+    @Override
+    public boolean deleteStudent(String studentID)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Student s = db.getStudent(studentID);
+                return db.deleteStudent(s);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteCourse(int courseID)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Course c = db.getCourse(courseID);
+                return db.deleteCourse(c);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteTeacher(String teacherID)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.principal) {
+                Teacher t = db.getTeacher(teacherID);
+                return db.deleteTeacher(t);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteDeck(int deckID)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                if (d.userOwnsDeck(user.get())) {
+                    return db.deleteDeck(d);
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteQuiz(int quizID)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Quiz q = db.getQuiz(quizID);
+                if (q.userOwnsQuiz(user.get())) {
+                    return db.deleteQuiz(q);
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

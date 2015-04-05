@@ -11,13 +11,13 @@ public class Prompt {
     private boolean running;
     private BufferedReader br;
     private String cmd;
-    
+
     public Prompt() {
         school = new SchoolController();
         running = true;
         br = new BufferedReader(new InputStreamReader(System.in));
     }
-    
+
     public void start() {
         do {
             print("> ");
@@ -25,23 +25,23 @@ public class Prompt {
             handle(cmd);
         } while (running);
     }
-    
+
     private static void print(int line) {
         System.out.print(line);
     }
-    
+
     private static void print(String line) {
         System.out.print(line);
     }
-    
+
     private static void println(int line) {
         System.out.println(line);
     }
-    
+
     private static void println(String line) {
         System.out.println(line);
     }
-    
+
     private String read() {
         try {
             return br.readLine();
@@ -51,7 +51,7 @@ public class Prompt {
             return null;
         }
     }
-    
+
     private int readInt() {
         while (true) {
             try {
@@ -63,17 +63,17 @@ public class Prompt {
             }
         }
     }
-    
+
     private String ask(String var) {
         print(var + ": ");
         return read();
     }
-    
+
     private int askInt(String var) {
         print(var + ": ");
         return readInt();
     }
-    
+
     private boolean attempt(boolean command) {
         if (command) {
             println(cmd + " succeeded");
@@ -82,7 +82,7 @@ public class Prompt {
         }
         return command;
     }
-    
+
     private void handle(String command) {
         switch (command) {
         case "login":
@@ -124,6 +124,21 @@ public class Prompt {
         case "edit course name":
             attempt(school.editCourseName(askInt("courseID"), ask("new course name")));
             break;
+        case "delete student":
+            attempt(school.deleteStudent(ask("studentID")));
+            break;
+        case "delete teacher":
+            attempt(school.deleteTeacher(ask("teacherID")));
+            break;
+        case "delete course":
+            attempt(school.deleteCourse(askInt("courseID")));
+            break;
+        case "delete quiz":
+            attempt(school.deleteQuiz(askInt("quizID")));
+            break;
+        case "delete deck":
+            attempt(school.deleteDeck(askInt("deckID")));
+            break;
         case "help":
         case "commands":
             println("- login");
@@ -134,6 +149,11 @@ public class Prompt {
             println("- create card");
             println("- create quiz");
             println("- create course");
+            println("- delete teacher");
+            println("- delete student");
+            println("- delete deck");
+            println("- delete quiz");
+            println("- delete course");
             println("- add quiz to student");
             println("- add student to course");
             println("- remove student from course");
@@ -150,7 +170,7 @@ public class Prompt {
             println("command not recognized - use \"help\" for a list of commands");
         }
     }
-    
+
     public static void main (String args[]) {
         Prompt p = new Prompt();
         p.start();

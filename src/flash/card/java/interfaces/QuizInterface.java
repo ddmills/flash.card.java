@@ -13,4 +13,5 @@ public interface QuizInterface {
     String getDescription();
     //Iteration 2:
     public boolean setQuizTitle(String quizTitle);
+    public boolean userOwnsQuiz(User u);
 }
