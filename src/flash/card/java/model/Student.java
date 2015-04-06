@@ -33,7 +33,13 @@ public class Student extends User implements StudentInterface {
 
     @Override
     public boolean removeQuiz(Quiz q) {
-        return quizList.remove(q.getQuizID(), q);
+
+        if(quizList.containsKey(q.getQuizID())) {
+            quizList.remove(q.getQuizID());
+            return true;
+        } else {
+            return false;
+        }
     }
     
     @Override
