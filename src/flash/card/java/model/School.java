@@ -164,16 +164,15 @@ public class School implements SchoolInterface {
     @Override
     public boolean editQuizTitle(int quizID, String quizTitle)
     {
+        boolean b = true;
         Quiz q = db.getQuiz(quizID);
-        if(q == null)
-        {
-            //quiz does not exist
-            return false;
-        }
-        else
-        {
-            return q.setQuizTitle(quizTitle);
-        }
+        
+        if(q == null) return false;
+
+        b = q.setQuizTitle(quizTitle);
+        b = db.putQuiz(q);
+        return b;
+
     }
 
     @Override
@@ -181,18 +180,7 @@ public class School implements SchoolInterface {
     {
         Course c = db.getCourse(courseID);
         Student s = db.getStudent(studentID);
-
-        if(c.addStudentToCourse(s))
-        {
-            //ok
-        }
-        else
-        {
-            //throw error up to console
-            return false;
-        }
-
-        return db.putCourse(c);
+        return c.addStudentToCourse(s) ? db.putCourse(c) : false;
     }
 
     @Override
@@ -200,17 +188,7 @@ public class School implements SchoolInterface {
     {
         Course c = db.getCourse(courseID);
         Student s = db.getStudent(studentID);
-
-        if(c.removeStudentFromCourse(s))
-        {
-            //ok
-        }
-        else
-        {
-            //throw error up to console
-            return false;
-        }
-        return db.putCourse(c);
+        return c.removeStudentFromCourse(s) ? db.putCourse(c) : false;
     }
 
     @Override
