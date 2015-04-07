@@ -1,5 +1,7 @@
 package flash.card.java.controller;
 
+import java.util.List;
+
 import flash.card.java.interfaces.SchoolControllerInterface;
 import flash.card.java.model.School;
 
@@ -118,5 +120,29 @@ public class SchoolController implements SchoolControllerInterface {
     public boolean deleteQuiz(int quizID)
     {
         return school.deleteQuiz(quizID);
+    }
+    
+    @Override
+    public boolean startQuiz(int quizID)
+    {
+        return school.startQuiz(quizID);
+    }
+    
+    @Override
+    public boolean answerQuestion(int cardID, String answer)
+    {
+        return school.answerQuestion(cardID, answer);
+    }
+    
+    @Override
+    public List<String> retrieveResults(int quizID)
+    {
+        return school.retrieveResults(quizID);
+    }
+    
+    @Override
+    public List<String> retrieveAllResults(int quizID)
+    {
+        return school.retrieveAllResults(quizID);
     }
 }

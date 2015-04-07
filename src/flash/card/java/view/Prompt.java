@@ -3,6 +3,7 @@ package flash.card.java.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import flash.card.java.controller.SchoolController;
 
@@ -74,13 +75,28 @@ public class Prompt {
         return readInt();
     }
 
-    private boolean attempt(boolean command) {
+    private void attemptList(List<String> list) {
+        if(list == null)
+        {
+            println(cmd + " failed");
+        }
+        else
+        {
+            for(int i = 0; i < list.size(); i++)
+            {
+                println(list.get(i));
+            }
+            
+            println(cmd + " succeeded");
+        }
+    }
+
+    private void attempt(boolean command) {
         if (command) {
             println(cmd + " succeeded");
         } else {
             println(cmd + " failed");
         }
-        return command;
     }
 
     private void handle(String command) {
@@ -139,6 +155,18 @@ public class Prompt {
         case "delete deck":
             attempt(school.deleteDeck(askInt("deckID")));
             break;
+        case "start quiz":
+            attempt(school.startQuiz(askInt("quizID")));
+            break;
+        case "answer question":
+            attempt(school.answerQuestion(askInt("cardID"), ask("answer")));
+            break;
+        case "retrieve results":
+            attemptList(school.retrieveResults(askInt("quizID")));
+            break;
+        case "retrieve all results":
+            attemptList(school.retrieveAllResults(askInt("quizID")));
+            break;
         case "help":
         case "commands":
             println("- login");
@@ -159,6 +187,10 @@ public class Prompt {
             println("- remove student from course");
             println("- edit quiz title");
             println("- edit course name");
+            println("- start quiz");
+            println("- answer question");
+            println("- retrieve results");
+            println("- retrieve all results");
             break;
         case "exit":
             running = false;

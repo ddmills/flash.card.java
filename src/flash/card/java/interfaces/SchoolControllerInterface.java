@@ -1,5 +1,7 @@
 package flash.card.java.interfaces;
 
+import java.util.List;
+
 public interface SchoolControllerInterface {
     //Iteration 1:
     boolean createTeacher (String name, String userID, String pass);
@@ -23,4 +25,8 @@ public interface SchoolControllerInterface {
     boolean deleteTeacher(String teacherID);
     boolean deleteDeck(int deckID);
     boolean deleteQuiz(int quizID);
+    boolean startQuiz(int quizID);
+    boolean answerQuestion(int cardID, String answer);
+    List<String> retrieveResults(int quizID);
+    List<String> retrieveAllResults(int quizID);
 }

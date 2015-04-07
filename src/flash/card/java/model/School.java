@@ -1,6 +1,7 @@
 package flash.card.java.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import flash.card.java.db.DatabaseSupport;
 import flash.card.java.interfaces.SchoolInterface;
@@ -257,5 +258,29 @@ public class School implements SchoolInterface {
             }
         }
         return false;
+    }
+    
+    @Override
+    public boolean startQuiz(int quizID)
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean answerQuestion(int cardID, String answer)
+    {
+        return false;
+    }
+    
+    @Override
+    public List<String> retrieveResults(int quizID)
+    {
+        return null;
+    }
+    
+    @Override
+    public List<String> retrieveAllResults(int quizID)
+    {
+        return null;
     }
 }
