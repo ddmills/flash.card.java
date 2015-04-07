@@ -30,8 +30,10 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private String[] cardColumns = {"cardID", "deckID", "front", "back"};
     private String[] quizColumns = {"quizID", "deckID", "ownerID", "title", "description"};
     private String[] deckColumns = {"deckID", "ownerID", "title", "description"};
-    private String[] courseColumns = {"courseID", "title"};
+    private String[] courseColumns = {"courseID", "title", "ownerID"};
     private String[] quizRelationsColumns = {"quizID", "studentID"};
+    private String[] resultColumns = {"resultID", "quizID", "userID", "answer"};
+    private String[] courseRelationsColumns = {"courseID", "userID"};
 
 
     private DatabaseSupport() {
@@ -273,37 +275,60 @@ public class DatabaseSupport implements DatabaseSupportInterface {
 
     @Override
     public boolean putCourse(Course c) {
-        //TODO: student list put
         try {
             Statement stmt = connection.createStatement();
             String sql;
             Course check = this.getCourse(c.getCourseID());
             if(check == null) {
-                sql = DatabaseHelpers.insert("course", courseColumns, "" + c.getCourseID(), c.getCourseName());
+                sql = DatabaseHelpers.insert("course", courseColumns, "" + c.getCourseID(), c.getCourseName(), c.getOwner().getUserID());
             } else {
-                sql = DatabaseHelpers.update("course", courseColumns[0], "" + c.getCourseID(), courseColumns, "" + c.getCourseID(), c.getCourseName() );
+                sql = DatabaseHelpers.update("course", courseColumns[0], "" + c.getCourseID(), courseColumns, "" + c.getCourseID(), c.getCourseName(), c.getOwner().getUserID() );
             }
             stmt.executeUpdate(sql);
+            
+            Statement stmtClean = connection.createStatement();
+            sql = "delete from course_relation where courseID = \"" + c.getCourseID() + "\";";
+            stmtClean.execute(sql);
+            
+            HashMap<String, Student> studentList = c.getStudentList();
+            for(String sKey : studentList.keySet())
+            {
+                Student s = studentList.get(sKey);
+                Statement insertStatement = connection.createStatement();
+                sql = DatabaseHelpers.insert("course_relation", courseRelationsColumns, "" + c.getCourseID(), s.getUserID());
+                insertStatement.execute(sql);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
 
     @Override
     public Course getCourse(int courseID)
     {
-        // TODO add student List functionality
         try
         {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.select("course", courseColumns[0], "" + courseID);
             ResultSet results = stmt.executeQuery(sql);
+            Course c = null;
             if(results.next()) {
-                return new Course(results.getInt(0), results.getString(1));
+                c = new Course(results.getInt(1), this.getTeacher(results.getString(3)), results.getString(2), new HashMap<String, Student>());
+                
+                Statement studentStmt = connection.createStatement();
+                String studentSql = "select * from course_relation where courseID = \"" + c.getCourseID() + "\";";
+                ResultSet students = studentStmt.executeQuery(studentSql);
+                while(students.next())
+                {
+                    Student s = this.getStudent(students.getString(3));
+                    c.addStudentToCourse(s);
+                }
+                
+                return c;
             }
+            
         }
         catch (SQLException e)
         {
@@ -324,7 +349,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("Deck", deckColumns[0], "" + d.getDeckID());
-            stmt.executeQuery(sql);
+            stmt.execute(sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -337,7 +363,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("Quiz", quizColumns[0], "" + q.getQuizID());
-            stmt.executeQuery(sql);
+            stmt.execute(sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -349,8 +376,9 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("Course", courseColumns[0], "" + c.getCourseID());
-            stmt.executeQuery(sql);
+            String sql = DatabaseHelpers.delete("course", courseColumns[0], "" + c.getCourseID());
+            stmt.execute(sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -363,7 +391,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("user", userColumns[0], s.getUserID());
-            stmt.executeQuery(sql);
+            stmt.execute(sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -376,7 +405,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("user", userColumns[0], t.getUserID());
-            stmt.executeQuery(sql);
+            stmt.execute(sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }

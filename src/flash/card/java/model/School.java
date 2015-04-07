@@ -1,5 +1,7 @@
 package flash.card.java.model;
 
+import java.util.HashMap;
+
 import flash.card.java.db.DatabaseSupport;
 import flash.card.java.interfaces.SchoolInterface;
 
@@ -136,7 +138,7 @@ public class School implements SchoolInterface {
     public boolean createCourse(int courseID, String title) {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-                Course c = new Course(courseID, title);
+                Course c = new Course(courseID, (Teacher)user.get(), title, new HashMap<String, Student>());
                 return this.db.putCourse(c);
             }
         }
