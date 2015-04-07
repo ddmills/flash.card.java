@@ -97,3 +97,34 @@ CREATE TABLE `result` (
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 ```
+
+### course table
+```mysql
+
+CREATE TABLE `course` (
+	`courseID` INT(11) NOT NULL,
+	`title` VARCHAR(50) NULL DEFAULT NULL,
+	`ownerID` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`courseID`),
+	INDEX `FK___user` (`ownerID`),
+	CONSTRAINT `FK___user` FOREIGN KEY (`ownerID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+```
+### course_relation table
+```mysql
+CREATE TABLE `course_relation` (
+	`rowID` INT(11) NOT NULL AUTO_INCREMENT,
+	`courseID` INT(11) NULL DEFAULT '0',
+	`userID` VARCHAR(50) NULL DEFAULT '0',
+	PRIMARY KEY (`rowID`),
+	INDEX `FK1` (`userID`),
+	INDEX `FK_course_relation_course` (`courseID`),
+	CONSTRAINT `FK1` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `FK_course_relation_course` FOREIGN KEY (`courseID`) REFERENCES `course` (`courseID`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COMMENT='relational table for students to courses'
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+```
