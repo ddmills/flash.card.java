@@ -6,8 +6,9 @@ public class Result implements ResultInterface {
 
     private int resultID;
     private String answer;
+    private Student student;
     
-    public Result (int id, String answer) {
+    public Result (int id, String answer, Student student) {
         this.resultID = id;
         this.answer = answer;
     }
@@ -20,5 +21,10 @@ public class Result implements ResultInterface {
     @Override
     public String getAnswer() {
         return this.answer;
+    }
+    
+    @Override
+    public Student getStudent() {
+        return this.student;
     }
 }
