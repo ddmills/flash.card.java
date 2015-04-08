@@ -372,11 +372,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public boolean deleteCourse(Course c)
+    public boolean deleteCourse(int courseID)
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("course", courseColumns[0], "" + c.getCourseID());
+            String sql = DatabaseHelpers.delete("course", courseColumns[0], "" + courseID);
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {
@@ -386,11 +386,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public boolean deleteStudent(Student s)
+    public boolean deleteStudent(String studentID)
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("user", userColumns[0], s.getUserID());
+            String sql = DatabaseHelpers.delete("user", userColumns[0], studentID);
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {
@@ -400,11 +400,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public boolean deleteTeacher(Teacher t)
+    public boolean deleteTeacher(String teacherID)
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("user", userColumns[0], t.getUserID());
+            String sql = DatabaseHelpers.delete("user", userColumns[0], teacherID);
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {

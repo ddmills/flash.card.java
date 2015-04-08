@@ -214,8 +214,7 @@ public class School implements SchoolInterface {
     {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-                Student s = db.getStudent(studentID);
-                return db.deleteStudent(s);
+                return db.deleteStudent(studentID);
             }
         }
         return false;
@@ -226,8 +225,7 @@ public class School implements SchoolInterface {
     {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-                Course c = db.getCourse(courseID);
-                return db.deleteCourse(c);
+                return db.deleteCourse(courseID);
             }
         }
         return false;
@@ -238,8 +236,7 @@ public class School implements SchoolInterface {
     {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.principal) {
-                Teacher t = db.getTeacher(teacherID);
-                return db.deleteTeacher(t);
+                return db.deleteTeacher(teacherID);
             }
         }
         return false;
