@@ -81,18 +81,21 @@ CREATE TABLE `quiz_relation` (
 ENGINE=InnoDB;
 ```
 
-### quiz result table
+### result table
 ```mysql
 CREATE TABLE `result` (
-	`resultID` INT(11) NOT NULL AUTO_INCREMENT,
-	`quizID` INT(11) NOT NULL DEFAULT '0',
-	`userID` VARCHAR(50) NOT NULL DEFAULT '0',
-	`answer` VARCHAR(50) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`resultID`),
-	INDEX `FK___1` (`quizID`),
-	INDEX `FK_result_user` (`userID`),
-	CONSTRAINT `FK___1` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT `FK_result_user` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+    `resultID` INT(11) NOT NULL AUTO_INCREMENT,
+    `cardID` INT(11) NOT NULL DEFAULT '0',
+    `quizID` INT(11) NOT NULL DEFAULT '0',
+    `userID` VARCHAR(50) NOT NULL DEFAULT '0',
+    `answer` VARCHAR(50) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`resultID`),
+    INDEX `FK____card` (`cardID`),
+    INDEX `FK____quiz` (`quizID`),
+    INDEX `FK____user` (`userID`),
+    CONSTRAINT `FK____card` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `FK____quiz` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `FK____user` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
