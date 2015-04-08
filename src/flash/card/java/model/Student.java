@@ -46,4 +46,9 @@ public class Student extends User implements StudentInterface {
     public HashMap<Integer, Quiz> getQuizzes() {
         return quizList;
     }
+    
+    @Override
+    public boolean checkListOfQuizzes(Quiz q) {
+        return quizList.containsKey(q.getQuizID());
+    }
 }

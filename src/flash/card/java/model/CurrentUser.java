@@ -21,6 +21,11 @@ public class CurrentUser implements CurrentUserInterface {
     }
     
     @Override
+    public String getUserID() {
+        return this.user.getUserID();
+    }
+    
+    @Override
     public boolean isSet() {
         return this.user != null;
     }

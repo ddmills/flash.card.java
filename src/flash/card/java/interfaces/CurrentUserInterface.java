@@ -8,5 +8,6 @@ public interface CurrentUserInterface {
     public User get();
     public boolean isSet();
     public boolean unset();
+    public String getUserID();
 
 }

@@ -9,10 +9,12 @@ import flash.card.java.interfaces.SchoolInterface;
 public class School implements SchoolInterface {
 
     CurrentUser user;
+    CurrentQuiz currentQuiz;
     DatabaseSupport db = null;
 
     public School() {
         this.user = new CurrentUser();
+        this.currentQuiz = new CurrentQuiz();
         this.db = DatabaseSupport.getInstance();
     }
 
@@ -263,6 +265,22 @@ public class School implements SchoolInterface {
     @Override
     public boolean startQuiz(int quizID)
     {
+        if (user.isSet())
+        {
+            if (user.get().access() == AccessLevel.student)
+            {
+                Quiz q = db.getQuiz(quizID);
+                if(q != null)
+                {
+                    Student s = db.getStudent(user.getUserID());
+                    if(s.checkListOfQuizzes(q))
+                    {
+                        currentQuiz.set(q);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
     
