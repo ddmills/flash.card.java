@@ -90,8 +90,7 @@ public class School implements SchoolInterface {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                Card c = d.getCard(cardID);
-                d.deleteCard(c);
+                d.deleteCard(cardID);
                 return db.putDeck(d);
             }
         }

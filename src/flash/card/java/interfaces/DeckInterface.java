@@ -9,7 +9,7 @@ public interface DeckInterface {
     // iteration 1
     public int getDeckID ();
     public boolean createCard (int cardID, String front, String back);
-    public boolean deleteCard (Card c);
+    public boolean deleteCard (int cardID);
     public boolean setOwner (User u);
     public Card getCard(int cardID);
     public HashMap<Integer, Card> getCards();

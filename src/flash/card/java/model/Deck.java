@@ -54,10 +54,10 @@ public class Deck implements DeckInterface {
     }
 
     @Override
-    public boolean deleteCard(Card c) {
+    public boolean deleteCard(int cardID) {
 
-        if(cardList.containsKey(c.getCardID())) {
-            cardList.remove(c.getCardID());
+        if(cardList.containsKey(cardID)) {
+            cardList.remove(cardID);
             return true;
         } else {
             return false;
