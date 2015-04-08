@@ -89,6 +89,7 @@ CREATE TABLE `result` (
     `quizID` INT(11) NOT NULL DEFAULT '0',
     `userID` VARCHAR(50) NOT NULL DEFAULT '0',
     `answer` VARCHAR(50) NOT NULL DEFAULT '0',
+    `correct` ENUM('Correct','Incorrect') NOT NULL,
     PRIMARY KEY (`resultID`),
     INDEX `FK____card` (`cardID`),
     INDEX `FK____quiz` (`quizID`),
