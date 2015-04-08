@@ -17,6 +17,7 @@ public interface SchoolControllerInterface {
     boolean removeQuizFromStudent (String userID, int quizID);
     //Iteration 2:
     boolean editCourseName(int courseID, String courseName);
+    boolean editDeckTitle(int deckID, String deckTitle);
     boolean editQuizTitle(int quizID, String quizTitle);
     boolean addStudentToCourse(int courseID, String studentID);
     boolean removeStudentFromCourse(int courseID, String studentID);

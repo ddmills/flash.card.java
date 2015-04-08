@@ -17,5 +17,6 @@ public interface DeckInterface {
     public String getTitle();
     public String getDescription();
     // iteration 2
-    public boolean userOwnsDeck(User u);
+    boolean userOwnsDeck(User u);
+    boolean setDeckTitle(String deckTitle);
 }

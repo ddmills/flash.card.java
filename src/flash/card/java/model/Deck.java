@@ -100,6 +100,13 @@ public class Deck implements DeckInterface {
     }
 
     @Override
+    public boolean setDeckTitle(String deckTitle)
+    {
+        this.title = deckTitle;
+        return true;
+    }
+
+    @Override
     public boolean userOwnsDeck(User u)
     {
         return u.getUserID() == this.getOwnerID();

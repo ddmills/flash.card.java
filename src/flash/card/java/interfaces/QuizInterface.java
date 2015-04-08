@@ -1,7 +1,12 @@
 package flash.card.java.interfaces;
 
+import java.util.HashMap;
+import java.util.List;
+
 import flash.card.java.model.Deck;
+import flash.card.java.model.Student;
 import flash.card.java.model.User;
+import flash.card.java.model.Result;
 
 public interface QuizInterface {
     //Iteration 1:
@@ -12,6 +17,10 @@ public interface QuizInterface {
     String getTitle();
     String getDescription();
     //Iteration 2:
-    public boolean setQuizTitle(String quizTitle);
-    public boolean userOwnsQuiz(User u);
+    boolean setQuizTitle(String quizTitle);
+    boolean userOwnsQuiz(User u);
+    boolean answerQuestion(int cardID, String answer, Student s);
+    List<String> retrieveResults(String studentID);
+    List<String> retrieveAllResults();
+    HashMap<Integer, Result> getResults();
 }

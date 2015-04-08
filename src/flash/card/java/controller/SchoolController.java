@@ -75,6 +75,12 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
+    public boolean editDeckTitle(int deckID, String deckTitle)
+    {
+        return school.editDeckTitle(deckID, deckTitle);
+    }
+
+    @Override
     public boolean editQuizTitle(int quizID, String quizTitle)
     {
         return school.editQuizTitle(quizID, quizTitle);

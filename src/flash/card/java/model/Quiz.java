@@ -1,20 +1,25 @@
 package flash.card.java.model;
 
+import java.util.List;
+import java.util.HashMap;
+
 import flash.card.java.interfaces.QuizInterface;
 
 public class Quiz implements QuizInterface{
 
     private int quizID;
     private Deck deck;
-    private User owner;
     private String title;
     private String description;
+    private HashMap<Integer, Result> resultList;
+    private User owner;
 
     public Quiz(int quizID, String title, String description, Deck d) {
         this.quizID = quizID;
         this.title = title;
         this.description = description;
         this.deck = d;
+        this.resultList = new HashMap<Integer, Result>();
     }
 
     public Quiz(int quizID, String title, String description, User owner, Deck d) {
@@ -23,6 +28,16 @@ public class Quiz implements QuizInterface{
         this.description = description;
         this.owner = owner;
         this.deck = d;
+        this.resultList = new HashMap<Integer, Result>();
+    }
+
+    public Quiz(int quizID, String title, String description, User owner, Deck d, HashMap<Integer, Result> resultList) {
+        this.quizID = quizID;
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.deck = d;
+        this.resultList = resultList;
     }
 
     @Override
@@ -62,6 +77,11 @@ public class Quiz implements QuizInterface{
     }
 
     @Override
+    public HashMap<Integer, Result> getResults() {
+        return resultList;
+    }
+
+    @Override
     public boolean setQuizTitle(String quizTitle)
     {
         this.title = quizTitle;
@@ -72,5 +92,23 @@ public class Quiz implements QuizInterface{
     public boolean userOwnsQuiz(User u)
     {
         return u.getUserID() == this.getOwner().getUserID();
+    }
+    
+    @Override
+    public boolean answerQuestion(int cardID, String answer, Student s)
+    {
+        return false;
+    }
+    
+    @Override
+    public List<String> retrieveResults(String studentID)
+    {
+        return null;
+    }
+    
+    @Override
+    public List<String> retrieveAllResults()
+    {
+        return null;
     }
 }

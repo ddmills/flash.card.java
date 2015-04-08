@@ -103,7 +103,8 @@ public class School implements SchoolInterface {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                Quiz q = new Quiz(quizID, title, description, this.user.get(), d);
+                Quiz q = new Quiz(quizID, title, description, d);
+                q.setOwner(this.user.get());
                 return db.putQuiz(q);
             }
         }
@@ -162,6 +163,20 @@ public class School implements SchoolInterface {
             c.setCourseName(courseName);
             return db.putCourse(c);
         }
+    }
+
+    @Override
+    public boolean editDeckTitle(int deckID, String deckTitle)
+    {
+        boolean b = true;
+        Deck d = db.getDeck(deckID);
+        
+        if(d == null) return false;
+
+        b = d.setDeckTitle(deckTitle);
+        b = db.putDeck(d);
+        return b;
+
     }
 
     @Override
