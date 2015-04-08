@@ -246,12 +246,7 @@ public class School implements SchoolInterface {
     {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-                Deck d = db.getDeck(deckID);
-                if (d.userOwnsDeck(user.get())) {
-                    return db.deleteDeck(d);
-                } else {
-                    return false;
-                }
+                return db.deleteDeck(deckID);
             }
         }
         return false;
@@ -262,12 +257,7 @@ public class School implements SchoolInterface {
     {
         if(user.isSet()) {
             if(user.get().accessLevel == AccessLevel.teacher) {
-                Quiz q = db.getQuiz(quizID);
-                if (q.userOwnsQuiz(user.get())) {
-                    return db.deleteQuiz(q);
-                } else {
-                    return false;
-                }
+                return db.deleteQuiz(quizID);
             }
         }
         return false;

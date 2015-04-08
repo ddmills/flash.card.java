@@ -93,12 +93,6 @@ public class Quiz implements QuizInterface{
         this.title = quizTitle;
         return true;
     }
-
-    @Override
-    public boolean userOwnsQuiz(User u)
-    {
-        return u.getUserID() == this.getOwner().getUserID();
-    }
     
     @Override
     public boolean answerQuestion(int cardID, String answer, Student s)

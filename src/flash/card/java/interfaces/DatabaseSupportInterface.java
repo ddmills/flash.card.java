@@ -24,8 +24,8 @@ public interface DatabaseSupportInterface {
     //Iteration 2:
     Course getCourse(int courseID);
     Teacher getTeacher(String teacherID);
-    boolean deleteDeck(Deck d);
-    boolean deleteQuiz(Quiz q);
+    boolean deleteDeck(int deckID);
+    boolean deleteQuiz(int quizID);
     boolean deleteCourse(int courseID);
     boolean deleteStudent(String studentID);
     boolean deleteTeacher(String teacherID);

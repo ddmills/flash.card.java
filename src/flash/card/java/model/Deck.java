@@ -105,11 +105,4 @@ public class Deck implements DeckInterface {
         this.title = deckTitle;
         return true;
     }
-
-    @Override
-    public boolean userOwnsDeck(User u)
-    {
-        return u.getUserID() == this.getOwnerID();
-    }
-
 }

@@ -344,11 +344,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public boolean deleteDeck(Deck d)
+    public boolean deleteDeck(int deckID)
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("Deck", deckColumns[0], "" + d.getDeckID());
+            String sql = DatabaseHelpers.delete("Deck", deckColumns[0], "" + deckID);
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {
@@ -358,11 +358,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     }
 
     @Override
-    public boolean deleteQuiz(Quiz q)
+    public boolean deleteQuiz(int quizID)
     {
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.delete("Quiz", quizColumns[0], "" + q.getQuizID());
+            String sql = DatabaseHelpers.delete("Quiz", quizColumns[0], "" + quizID);
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {

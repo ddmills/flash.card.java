@@ -18,7 +18,6 @@ public interface QuizInterface {
     String getDescription();
     //Iteration 2:
     boolean setQuizTitle(String quizTitle);
-    boolean userOwnsQuiz(User u);
     boolean answerQuestion(int cardID, String answer, Student s);
     List<String> retrieveResults(Student s);
     List<String> retrieveAllResults();
