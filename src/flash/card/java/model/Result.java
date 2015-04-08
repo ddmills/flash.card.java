@@ -6,11 +6,16 @@ public class Result implements ResultInterface {
 
     private int resultID;
     private String answer;
+    private Card card;
     private Student student;
+    private String correct;
     
-    public Result (int id, String answer, Student student) {
+    public Result (int id, String answer, String correct, Card card, Student student) {
         this.resultID = id;
         this.answer = answer;
+        this.correct = correct;
+        this.card = card;
+        this.student = student;
     }
     
     @Override
@@ -24,7 +29,17 @@ public class Result implements ResultInterface {
     }
     
     @Override
+    public String getCorrect() {
+        return this.correct;
+    }
+    
+    @Override
     public Student getStudent() {
         return this.student;
+    }
+    
+    @Override
+    public Card getCard() {
+        return this.card;
     }
 }

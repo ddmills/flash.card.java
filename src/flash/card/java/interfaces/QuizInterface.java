@@ -20,7 +20,8 @@ public interface QuizInterface {
     boolean setQuizTitle(String quizTitle);
     boolean userOwnsQuiz(User u);
     boolean answerQuestion(int cardID, String answer, Student s);
-    List<String> retrieveResults(String studentID);
+    List<String> retrieveResults(Student s);
     List<String> retrieveAllResults();
     HashMap<Integer, Result> getResults();
+    void setResults(HashMap<Integer, Result> resultList);
 }

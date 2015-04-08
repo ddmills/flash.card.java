@@ -82,6 +82,12 @@ public class Quiz implements QuizInterface{
     }
 
     @Override
+    public void setResults(HashMap<Integer, Result> resultList)
+    {
+        this.resultList = resultList;
+    }
+
+    @Override
     public boolean setQuizTitle(String quizTitle)
     {
         this.title = quizTitle;
@@ -101,7 +107,7 @@ public class Quiz implements QuizInterface{
     }
     
     @Override
-    public List<String> retrieveResults(String studentID)
+    public List<String> retrieveResults(Student s)
     {
         return null;
     }
