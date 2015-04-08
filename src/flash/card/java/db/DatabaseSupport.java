@@ -75,7 +75,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         Student student = (Student) getUser(studentID);
         try {
             Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.select("quiz_relation", quizRelationsColumns[0], studentID);
+            String sql = DatabaseHelpers.select("quiz_relation", quizRelationsColumns[1], studentID);
             ResultSet quizIDs = stmt.executeQuery(sql);
             while(quizIDs.next()) {
                 Quiz currentQuiz = this.getQuiz(quizIDs.getInt(2));
