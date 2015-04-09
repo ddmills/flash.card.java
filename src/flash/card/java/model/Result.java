@@ -11,12 +11,17 @@ public class Result implements ResultInterface {
     private Student student;
     private HashMap<Integer, Answer> answerList;
     
-    public Result (int quizID, Student student) {
+    public Result (int quizID, Student student, int score) {
         this.resultID = quizID + student.getUserID();
-        this.score = 0;
+        this.score = score;
         this.student = student;
         this.answerList = new HashMap<Integer, Answer>();
     }
+    
+    public Result (int quizID, Student student) {
+        this(quizID, student, 0);
+    }
+    
     
     @Override
     public String getResultID() {

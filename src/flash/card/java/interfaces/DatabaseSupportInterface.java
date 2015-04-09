@@ -1,6 +1,5 @@
 package flash.card.java.interfaces;
 
-import flash.card.java.model.Card;
 import flash.card.java.model.Course;
 import flash.card.java.model.Deck;
 import flash.card.java.model.Principal;

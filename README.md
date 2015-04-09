@@ -102,13 +102,13 @@ ENGINE=InnoDB;
 ```mysql
 CREATE TABLE `answer` (
     `answerID` INT(11) NOT NULL,
-    `resultID` INT(11) NOT NULL,
+    `resultID` VARCHAR(50) NOT NULL,
     `question` VARCHAR(50) NOT NULL,
     `expectedanswer` VARCHAR(50) NOT NULL,
     `actualanswer` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`answerID`, `resultID`),
     INDEX `FK____results` (`resultID`),
-    CONSTRAINT `FK____results` FOREIGN KEY (`resultID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE
+    CONSTRAINT `FK____results` FOREIGN KEY (`resultID`) REFERENCES `result` (`resultID`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;

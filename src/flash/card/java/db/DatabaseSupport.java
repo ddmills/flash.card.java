@@ -13,11 +13,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import flash.card.java.interfaces.DatabaseSupportInterface;
+import flash.card.java.model.Answer;
 import flash.card.java.model.Card;
 import flash.card.java.model.Course;
 import flash.card.java.model.Deck;
 import flash.card.java.model.Principal;
 import flash.card.java.model.Quiz;
+import flash.card.java.model.Result;
 import flash.card.java.model.Student;
 import flash.card.java.model.Teacher;
 import flash.card.java.model.User;
@@ -31,9 +33,10 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private String[] quizColumns = {"quizID", "deckID", "ownerID", "title", "description"};
     private String[] deckColumns = {"deckID", "ownerID", "title", "description"};
     private String[] courseColumns = {"courseID", "title", "ownerID"};
-    private String[] quizRelationsColumns = {"quizID", "studentID"};
-    private String[] resultColumns = {"resultID", "quizID", "userID", "answer"};
+    private String[] resultColumns = {"resultID", "quizID", "userID", "score"};
+    private String[] answerColumns = {"answerID", "resultID", "question", "expectedanswer", "actualanswer"};
     private String[] courseRelationsColumns = {"courseID", "userID"};
+    private String[] quizRelationsColumns = {"quizID", "studentID"};
 
 
     private DatabaseSupport() {
@@ -160,13 +163,12 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     @Override
     public Deck getDeck(int deckID) {
         try {
-            Deck d;
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.select("deck", deckColumns[0], "" + deckID);
             ResultSet results = stmt.executeQuery(sql);
             if (results.next()) {
                 User u = getUser(results.getString(2));
-                d = new Deck(results.getInt(1), results.getString(3), results.getString(4), u);
+                Deck d = new Deck(results.getInt(1), results.getString(3), results.getString(4), u);
                 Statement cardstmt = connection.createStatement();
                 String cardsql = "select * from card where deckID = \"" + d.getDeckID() + "\";";
                 ResultSet cards = cardstmt.executeQuery(cardsql);
@@ -211,20 +213,6 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         return true;
     }
 
-    public Card getCard(int cardID) {
-        try {
-            Statement stmt = connection.createStatement();
-            String sql = DatabaseHelpers.select("card", cardColumns[0], "" + cardID);
-            ResultSet results = stmt.executeQuery(sql);
-            if (results.next()) {
-                return new Card(results.getInt(1), results.getString(3), results.getString(4));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @Override
     public Quiz getQuiz(int quizID) {
         try {
@@ -234,7 +222,26 @@ public class DatabaseSupport implements DatabaseSupportInterface {
             if (results.next()) {
                 Deck d = this.getDeck(results.getInt(2));
                 User u = this.getUser(results.getString(3));
-                return new Quiz(results.getInt(1), results.getString(4), results.getString(5), u, d);
+                Quiz q = new Quiz(results.getInt(1), results.getString(4), results.getString(5), u, d);
+                
+                Statement resultstmt = connection.createStatement();
+                String resultsql = "select * from result where quizID = \"" + q.getQuizID() + "\";";
+                ResultSet quizResults = resultstmt.executeQuery(resultsql);
+                while (quizResults.next()) {
+                    Student s = (Student)this.getUser(quizResults.getString(3));
+                    Result r = new Result(q.getQuizID(), s, quizResults.getInt(4));
+                    
+                    Statement answerstmt = connection.createStatement();
+                    String answersql = "select * from answer where resultID = \"" + r.getResultID() + "\";";
+                    ResultSet answerResults = answerstmt.executeQuery(answersql);
+                    while (answerResults.next()) {
+                        Answer answer = new Answer(answerResults.getInt(1), answerResults.getString(3), answerResults.getString(4), answerResults.getString(5));
+                        r.addAnswer(answer);
+                    }
+                    
+                    q.addResult(r);
+                }
+                return q;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -254,6 +261,28 @@ public class DatabaseSupport implements DatabaseSupportInterface {
                 sql = DatabaseHelpers.update("quiz", quizColumns[0], "" + q.getQuizID(), quizColumns, "" + q.getQuizID(), "" + q.getDeck().getDeckID(), q.getOwner().getUserID(), q.getTitle(), q.getDescription());
             }
             stmt.executeUpdate(sql);
+            
+            Statement stmtClean = connection.createStatement();
+            sql = "delete from result where quizID = \"" + q.getQuizID() + "\";";
+            stmtClean.execute(sql);
+            HashMap<String, Result> results = q.getResults();
+            for (String studentID : results.keySet()) {
+                Result r = results.get(studentID);
+                Statement stmtInsert = connection.createStatement();
+                sql = DatabaseHelpers.insert("result", resultColumns, r.getResultID(), "" + q.getQuizID(), "" + r.getStudent().getUserID(), "" + r.getScore());
+                stmtInsert.execute(sql);
+                
+                Statement stmtCleanA = connection.createStatement();
+                sql = "delete from answer where resultID = \"" + r.getResultID() + "\";";
+                stmtCleanA.execute(sql);
+                HashMap<Integer, Answer> answers = r.getAnswers();
+                for (Integer answerID : answers.keySet()) {
+                    Answer a = answers.get(answerID);
+                    Statement stmtInsertA = connection.createStatement();
+                    sql = DatabaseHelpers.insert("answer", answerColumns, "" + a.getAnswerID(), r.getResultID(), a.getQuestion(), a.getExpectedAnswer(), a.getActualAnswer());
+                    stmtInsertA.execute(sql);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -265,7 +294,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "");
         } catch (Exception e) {
             connection = null;
             e.printStackTrace();
