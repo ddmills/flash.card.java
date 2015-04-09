@@ -128,6 +128,9 @@ public class Prompt {
         case "add quiz to student":
             attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
             break;
+        case "remove quiz from student":
+            attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
+            break;
         case "add student to course":
             attempt(school.addStudentToCourse(askInt("courseID"), ask("student id")));
             break;
@@ -152,6 +155,9 @@ public class Prompt {
         case "delete course":
             attempt(school.deleteCourse(askInt("courseID")));
             break;
+        case "delete card":
+            attempt(school.deleteCard(askInt("cardID"), askInt("deckID")));
+            break;
         case "delete quiz":
             attempt(school.deleteQuiz(askInt("quizID")));
             break;
@@ -159,10 +165,10 @@ public class Prompt {
             attempt(school.deleteDeck(askInt("deckID")));
             break;
         case "start quiz":
-            attempt(school.startQuiz(askInt("quizID")));
+            //startQuiz(askInt("quizID"));
             break;
-        case "answer question":
-            attempt(school.answerQuestion(askInt("cardID"), ask("answer")));
+        case "end quiz":
+            //finishQuiz(askInt("quizID"));
             break;
         case "retrieve results":
             attemptList(school.retrieveResults(askInt("quizID")));
@@ -174,6 +180,8 @@ public class Prompt {
         case "commands":
             println("- login");
             println("- logout");
+            println("- start quiz");
+            println("- end quiz");
             println("- create teacher");
             println("- create student");
             println("- create deck");
@@ -182,17 +190,17 @@ public class Prompt {
             println("- create course");
             println("- delete teacher");
             println("- delete student");
+            println("- delete card");
             println("- delete deck");
             println("- delete quiz");
             println("- delete course");
             println("- add quiz to student");
+            println("- remove quiz from student");
             println("- add student to course");
             println("- remove student from course");
             println("- edit course name");
             println("- edit deck title");
             println("- edit quiz title");
-            println("- start quiz");
-            println("- answer question");
             println("- retrieve results");
             println("- retrieve all results");
             break;
