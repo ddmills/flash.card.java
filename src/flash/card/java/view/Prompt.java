@@ -7,8 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import flash.card.java.controller.SchoolController;
+import flash.card.java.model.Answer;
 import flash.card.java.model.Card;
+import flash.card.java.model.CurrentUser;
 import flash.card.java.model.Quiz;
+import flash.card.java.model.Result;
+import flash.card.java.model.Student;
+
 
 public class Prompt {
     private SchoolController school;
@@ -77,8 +82,28 @@ public class Prompt {
         print(var + ": ");
         return readInt();
     }
-
-    private void attemptList(List<String> list) {
+    
+    private void displayResult(Result result) {
+        if(result == null)
+        {
+            println(cmd + " failed");
+        }
+        else
+        {
+            println("Student: " + result.getStudent().getUserID());
+            
+            HashMap<Integer, Answer> qaPair = result.getAnswers();
+            for (Integer id : qaPair.keySet())
+            {
+                Answer qa = qaPair.get(id);
+                println(qa.getQuestion());
+                println(qa.getExpectedAnswer());
+                println(qa.getActualAnswer());
+            }
+        }
+    }
+    
+    private void displayResultList(List<Result> list) {
         if(list == null)
         {
             println(cmd + " failed");
@@ -87,10 +112,8 @@ public class Prompt {
         {
             for(int i = 0; i < list.size(); i++)
             {
-                println(list.get(i));
+                displayResult(list.get(i));
             }
-            
-            println(cmd + " succeeded");
         }
     }
 
@@ -102,38 +125,33 @@ public class Prompt {
         }
     }
     
-    private void startQuiz(int quizID)
+    private void runQuiz(int quizID)
     {
         Quiz quiz = school.startQuiz(quizID);
         if (quiz != null)
         {
             println("Loading quiz succeeded.");
+            
+            CurrentUser user = CurrentUser.getInstance();
+            Result result = new Result(quizID, (Student)user.get());
+            
             HashMap<Integer, Card> questions = quiz.getDeck().getCards();
             for (Integer cardID : questions.keySet())
             {
                 Card question = questions.get(cardID);
                 println("Question: " + question.getFront());
                 print("Answer: ");
-                String answer = read();
+                String actualAnswer = read();
+                Answer answer = new Answer(cardID, question.getFront(), question.getBack(), actualAnswer);
+                result.addAnswer(answer);
             }
+            
+            school.endQuiz(quizID, result);
         }
         else
         {
             println("Loading quiz failed.");
         }
-    }
-    
-    private void endQuiz(int quizID)
-    {
-        // boolean success = school.endQuiz(quizID);
-        // if (success)
-        // {
-            // println("Saving quiz results succeeded.");
-        // }
-        // else
-        // {
-            // println("Saving quiz results failed.");
-        // }
     }
     
     private void handle(String command) {
@@ -201,24 +219,20 @@ public class Prompt {
         case "delete deck":
             attempt(school.deleteDeck(askInt("deckID")));
             break;
-        case "start quiz":
-            startQuiz(askInt("quizID"));
-            break;
-        case "end quiz":
-            endQuiz(askInt("quizID"));
+        case "take quiz":
+            runQuiz(askInt("quizID"));
             break;
         case "retrieve results":
-            //attemptList(school.retrieveResults(askInt("quizID")));
+            displayResult(school.retrieveResults(askInt("quizID")));
             break;
         case "retrieve all results":
-            //attemptList(school.retrieveAllResults(askInt("quizID")));
+            displayResultList(school.retrieveAllResults(askInt("quizID")));
             break;
         case "help":
         case "commands":
             println("- login");
             println("- logout");
-            println("- start quiz");
-            println("- end quiz");
+            println("- take quiz");
             println("- create teacher");
             println("- create student");
             println("- create deck");

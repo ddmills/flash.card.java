@@ -12,7 +12,7 @@ public class School implements SchoolInterface {
     DatabaseSupport db = null;
 
     public School() {
-        this.user = new CurrentUser();
+        this.user = CurrentUser.getInstance();
         this.db = DatabaseSupport.getInstance();
     }
 
