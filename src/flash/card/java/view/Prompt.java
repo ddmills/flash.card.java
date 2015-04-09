@@ -90,15 +90,18 @@ public class Prompt {
         }
         else
         {
+            System.out.println();
             println("Student: " + result.getStudent().getUserID());
+            System.out.println();
             
             HashMap<Integer, Answer> qaPair = result.getAnswers();
             for (Integer id : qaPair.keySet())
             {
                 Answer qa = qaPair.get(id);
-                println(qa.getQuestion());
-                println(qa.getExpectedAnswer());
-                println(qa.getActualAnswer());
+                println("Question: " + qa.getQuestion());
+                println("Expected Answer: " + qa.getExpectedAnswer());
+                println("Actual Answer: " + qa.getActualAnswer());
+                System.out.println();
             }
         }
     }

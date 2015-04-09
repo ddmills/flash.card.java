@@ -323,7 +323,7 @@ public class School implements SchoolInterface {
     {
         if (user.isSet())
         {
-            if (user.get().access() == AccessLevel.student)
+            if (user.get().access() == AccessLevel.teacher)
             {
                 Quiz q = db.getQuiz(quizID);
                 if(q != null)
