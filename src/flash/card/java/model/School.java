@@ -9,12 +9,10 @@ import flash.card.java.interfaces.SchoolInterface;
 public class School implements SchoolInterface {
 
     CurrentUser user;
-    CurrentQuiz currentQuiz;
     DatabaseSupport db = null;
 
     public School() {
         this.user = new CurrentUser();
-        this.currentQuiz = new CurrentQuiz();
         this.db = DatabaseSupport.getInstance();
     }
 
@@ -264,7 +262,7 @@ public class School implements SchoolInterface {
     }
     
     @Override
-    public boolean startQuiz(int quizID)
+    public Quiz startQuiz(int quizID)
     {
         if (user.isSet())
         {
@@ -276,17 +274,16 @@ public class School implements SchoolInterface {
                     Student s = db.getStudent(user.getUserID());
                     if(s.checkListOfQuizzes(q))
                     {
-                        currentQuiz.set(q);
-                        return true;
+                        return q;
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
     
     @Override
-    public boolean answerQuestion(int cardID, String answer)
+    public boolean endQuiz(int quizID, Result result)
     {
         return false;
     }

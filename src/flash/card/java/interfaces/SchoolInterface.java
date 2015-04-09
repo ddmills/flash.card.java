@@ -2,6 +2,9 @@ package flash.card.java.interfaces;
 
 import java.util.List;
 
+import flash.card.java.model.Quiz;
+import flash.card.java.model.Result;
+
 public interface SchoolInterface {
     //Iteration 1:
     boolean createTeacher (String name, String userID, String pass);
@@ -26,8 +29,8 @@ public interface SchoolInterface {
     boolean deleteTeacher(String teacherID);
     boolean deleteDeck(int deckID);
     boolean deleteQuiz(int quizID);
-    boolean startQuiz(int quizID);
-    boolean answerQuestion(int cardID, String answer);
+    Quiz startQuiz(int quizID);
+    boolean endQuiz(int quizID, Result result);
     List<String> retrieveResults(int quizID);
     List<String> retrieveAllResults(int quizID);
 }

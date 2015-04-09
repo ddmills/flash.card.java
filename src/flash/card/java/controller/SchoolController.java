@@ -3,6 +3,8 @@ package flash.card.java.controller;
 import java.util.List;
 
 import flash.card.java.interfaces.SchoolControllerInterface;
+import flash.card.java.model.Quiz;
+import flash.card.java.model.Result;
 import flash.card.java.model.School;
 
 public class SchoolController implements SchoolControllerInterface {
@@ -129,15 +131,15 @@ public class SchoolController implements SchoolControllerInterface {
     }
     
     @Override
-    public boolean startQuiz(int quizID)
+    public Quiz startQuiz(int quizID)
     {
         return school.startQuiz(quizID);
     }
     
     @Override
-    public boolean answerQuestion(int cardID, String answer)
+    public boolean endQuiz(int quizID, Result results)
     {
-        return school.answerQuestion(cardID, answer);
+        return school.endQuiz(quizID, results);
     }
     
     @Override

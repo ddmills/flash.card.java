@@ -3,9 +3,12 @@ package flash.card.java.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 import flash.card.java.controller.SchoolController;
+import flash.card.java.model.Card;
+import flash.card.java.model.Quiz;
 
 public class Prompt {
     private SchoolController school;
@@ -98,7 +101,41 @@ public class Prompt {
             println(cmd + " failed");
         }
     }
-
+    
+    private void startQuiz(int quizID)
+    {
+        Quiz quiz = school.startQuiz(quizID);
+        if (quiz != null)
+        {
+            println("Loading quiz succeeded.");
+            HashMap<Integer, Card> questions = quiz.getDeck().getCards();
+            for (Integer cardID : questions.keySet())
+            {
+                Card question = questions.get(cardID);
+                println("Question: " + question.getFront());
+                print("Answer: ");
+                String answer = read();
+            }
+        }
+        else
+        {
+            println("Loading quiz failed.");
+        }
+    }
+    
+    private void endQuiz(int quizID)
+    {
+        // boolean success = school.endQuiz(quizID);
+        // if (success)
+        // {
+            // println("Saving quiz results succeeded.");
+        // }
+        // else
+        // {
+            // println("Saving quiz results failed.");
+        // }
+    }
+    
     private void handle(String command) {
         switch (command) {
         case "login":
@@ -165,10 +202,10 @@ public class Prompt {
             attempt(school.deleteDeck(askInt("deckID")));
             break;
         case "start quiz":
-            //startQuiz(askInt("quizID"));
+            startQuiz(askInt("quizID"));
             break;
         case "end quiz":
-            //finishQuiz(askInt("quizID"));
+            endQuiz(askInt("quizID"));
             break;
         case "retrieve results":
             attemptList(school.retrieveResults(askInt("quizID")));
