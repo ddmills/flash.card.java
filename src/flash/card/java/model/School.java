@@ -32,9 +32,13 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean createStudent(String name, String userID, String pass) {
-        Student s = new Student(name, userID, pass);
-
-        return this.db.putStudent(s);
+        if (user.isSet()) {
+            if (user.get().access() == AccessLevel.teacher) {
+                Student s = new Student(name, userID, pass);
+                return this.db.putStudent(s);
+            }
+        }
+        return false;
     }
 
     @Override
