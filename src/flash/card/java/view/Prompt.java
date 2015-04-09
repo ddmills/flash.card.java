@@ -208,10 +208,10 @@ public class Prompt {
             endQuiz(askInt("quizID"));
             break;
         case "retrieve results":
-            attemptList(school.retrieveResults(askInt("quizID")));
+            //attemptList(school.retrieveResults(askInt("quizID")));
             break;
         case "retrieve all results":
-            attemptList(school.retrieveAllResults(askInt("quizID")));
+            //attemptList(school.retrieveAllResults(askInt("quizID")));
             break;
         case "help":
         case "commands":

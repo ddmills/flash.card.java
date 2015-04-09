@@ -48,20 +48,31 @@ CREATE TABLE `quiz` (
 ENGINE=InnoDB;
 
 CREATE TABLE `result` (
-	`resultID` INT(11) NOT NULL AUTO_INCREMENT,
-	`quizID` INT(11) NOT NULL DEFAULT '0',
-	`userID` VARCHAR(50) NOT NULL DEFAULT '0',
-	`answer` VARCHAR(50) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`resultID`),
-	INDEX `FK___1` (`quizID`),
-	INDEX `FK_result_user` (`userID`),
-	CONSTRAINT `FK___1` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT `FK_result_user` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+    `resultID` VARCHAR(50) NOT NULL,
+    `quizID` INT(11) NOT NULL,
+    `userID` VARCHAR(50) NOT NULL,
+    `score` INT(11) NOT NULL,
+    PRIMARY KEY (`resultID`),
+    INDEX `FK____quiz` (`quizID`),
+    INDEX `FK____user` (`userID`),
+    CONSTRAINT `FK____quiz` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `FK____user` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
-
+CREATE TABLE `answer` (
+    `answerID` INT(11) NOT NULL,
+    `resultID` INT(11) NOT NULL,
+    `question` VARCHAR(50) NOT NULL,
+    `expectedanswer` VARCHAR(50) NOT NULL,
+    `actualanswer` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`answerID`, `resultID`),
+    INDEX `FK____results` (`resultID`),
+    CONSTRAINT `FK____results` FOREIGN KEY (`resultID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
 
 CREATE TABLE `course` (
 	`courseID` INT(11) NOT NULL,

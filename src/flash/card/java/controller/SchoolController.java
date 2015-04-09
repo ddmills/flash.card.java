@@ -143,13 +143,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
     
     @Override
-    public List<String> retrieveResults(int quizID)
+    public Result retrieveResults(int quizID)
     {
         return school.retrieveResults(quizID);
     }
     
     @Override
-    public List<String> retrieveAllResults(int quizID)
+    public List<Result> retrieveAllResults(int quizID)
     {
         return school.retrieveAllResults(quizID);
     }

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import flash.card.java.model.Deck;
-import flash.card.java.model.Student;
 import flash.card.java.model.User;
 import flash.card.java.model.Result;
 
@@ -18,9 +17,8 @@ public interface QuizInterface {
     String getDescription();
     //Iteration 2:
     boolean setQuizTitle(String quizTitle);
-    boolean answerQuestion(int cardID, String answer, Student s);
-    List<String> retrieveResults(Student s);
-    List<String> retrieveAllResults();
-    HashMap<Integer, Result> getResults();
-    void setResults(HashMap<Integer, Result> resultList);
+    boolean addResult(Result result);
+    Result retrieveResults(String studentID);
+    List<Result> retrieveAllResults();
+    HashMap<String, Result> getResults();
 }

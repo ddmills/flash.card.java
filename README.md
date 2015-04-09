@@ -84,19 +84,31 @@ ENGINE=InnoDB;
 ### result table
 ```mysql
 CREATE TABLE `result` (
-    `resultID` INT(11) NOT NULL AUTO_INCREMENT,
-    `cardID` INT(11) NOT NULL DEFAULT '0',
-    `quizID` INT(11) NOT NULL DEFAULT '0',
-    `userID` VARCHAR(50) NOT NULL DEFAULT '0',
-    `answer` VARCHAR(50) NOT NULL DEFAULT '0',
-    `correct` ENUM('Correct','Incorrect') NOT NULL,
+    `resultID` VARCHAR(50) NOT NULL,
+    `quizID` INT(11) NOT NULL,
+    `userID` VARCHAR(50) NOT NULL,
+    `score` INT(11) NOT NULL,
     PRIMARY KEY (`resultID`),
-    INDEX `FK____card` (`cardID`),
     INDEX `FK____quiz` (`quizID`),
     INDEX `FK____user` (`userID`),
-    CONSTRAINT `FK____card` FOREIGN KEY (`cardID`) REFERENCES `card` (`cardID`) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT `FK____quiz` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT `FK____user` FOREIGN KEY (`userID`) REFERENCES `user` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+```
+
+### answer table
+```mysql
+CREATE TABLE `answer` (
+    `answerID` INT(11) NOT NULL,
+    `resultID` INT(11) NOT NULL,
+    `question` VARCHAR(50) NOT NULL,
+    `expectedanswer` VARCHAR(50) NOT NULL,
+    `actualanswer` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`answerID`, `resultID`),
+    INDEX `FK____results` (`resultID`),
+    CONSTRAINT `FK____results` FOREIGN KEY (`resultID`) REFERENCES `quiz` (`quizID`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;

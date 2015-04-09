@@ -31,6 +31,6 @@ public interface SchoolInterface {
     boolean deleteQuiz(int quizID);
     Quiz startQuiz(int quizID);
     boolean endQuiz(int quizID, Result result);
-    List<String> retrieveResults(int quizID);
-    List<String> retrieveAllResults(int quizID);
+    Result retrieveResults(int quizID);
+    List<Result> retrieveAllResults(int quizID);
 }

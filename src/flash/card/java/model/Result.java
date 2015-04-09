@@ -4,42 +4,28 @@ import flash.card.java.interfaces.ResultInterface;
 
 public class Result implements ResultInterface {
 
-    private int resultID;
-    private String answer;
-    private Card card;
+    private String resultID;
+    private int score;
     private Student student;
-    private String correct;
     
-    public Result (int id, String answer, String correct, Card card, Student student) {
-        this.resultID = id;
-        this.answer = answer;
-        this.correct = correct;
-        this.card = card;
+    public Result (int quizID, Student student) {
+        this.resultID = quizID + student.getUserID();
+        this.score = 0;
         this.student = student;
     }
     
     @Override
-    public int getResultID() {
+    public String getResultID() {
         return this.resultID;
     }
     
     @Override
-    public String getAnswer() {
-        return this.answer;
-    }
-    
-    @Override
-    public String getCorrect() {
-        return this.correct;
+    public int getScore() {
+        return this.score;
     }
     
     @Override
     public Student getStudent() {
         return this.student;
-    }
-    
-    @Override
-    public Card getCard() {
-        return this.card;
     }
 }

@@ -1,5 +1,6 @@
 package flash.card.java.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ public class Quiz implements QuizInterface{
     private Deck deck;
     private String title;
     private String description;
-    private HashMap<Integer, Result> resultList;
+    private HashMap<String, Result> resultList;
     private User owner;
 
     public Quiz(int quizID, String title, String description, Deck d) {
@@ -19,7 +20,7 @@ public class Quiz implements QuizInterface{
         this.title = title;
         this.description = description;
         this.deck = d;
-        this.resultList = new HashMap<Integer, Result>();
+        this.resultList = new HashMap<String, Result>();
     }
 
     public Quiz(int quizID, String title, String description, User owner, Deck d) {
@@ -28,10 +29,10 @@ public class Quiz implements QuizInterface{
         this.description = description;
         this.owner = owner;
         this.deck = d;
-        this.resultList = new HashMap<Integer, Result>();
+        this.resultList = new HashMap<String, Result>();
     }
 
-    public Quiz(int quizID, String title, String description, User owner, Deck d, HashMap<Integer, Result> resultList) {
+    public Quiz(int quizID, String title, String description, User owner, Deck d, HashMap<String, Result> resultList) {
         this.quizID = quizID;
         this.title = title;
         this.description = description;
@@ -77,14 +78,15 @@ public class Quiz implements QuizInterface{
     }
 
     @Override
-    public HashMap<Integer, Result> getResults() {
+    public HashMap<String, Result> getResults() {
         return resultList;
     }
 
     @Override
-    public void setResults(HashMap<Integer, Result> resultList)
+    public boolean addResult(Result result)
     {
-        this.resultList = resultList;
+        this.resultList.put(result.getStudent().getUserID(), result);
+        return true;
     }
 
     @Override
@@ -95,20 +97,14 @@ public class Quiz implements QuizInterface{
     }
     
     @Override
-    public boolean answerQuestion(int cardID, String answer, Student s)
+    public Result retrieveResults(String studentID)
     {
-        return false;
+        return resultList.get(studentID);
     }
     
     @Override
-    public List<String> retrieveResults(Student s)
+    public List<Result> retrieveAllResults()
     {
-        return null;
-    }
-    
-    @Override
-    public List<String> retrieveAllResults()
-    {
-        return null;
+        return new ArrayList<Result>(resultList.values());
     }
 }

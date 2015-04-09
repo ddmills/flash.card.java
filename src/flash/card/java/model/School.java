@@ -285,18 +285,53 @@ public class School implements SchoolInterface {
     @Override
     public boolean endQuiz(int quizID, Result result)
     {
+        if (user.isSet())
+        {
+            if (user.get().access() == AccessLevel.student)
+            {
+                Quiz q = db.getQuiz(quizID);
+                if(q != null)
+                {
+                    q.addResult(result);
+                    return db.putQuiz(q);
+                }
+            }
+        }
         return false;
     }
     
     @Override
-    public List<String> retrieveResults(int quizID)
+    public Result retrieveResults(int quizID)
     {
+        if (user.isSet())
+        {
+            if (user.get().access() == AccessLevel.student)
+            {
+                String studentID = this.user.getUserID();
+                Quiz q = db.getQuiz(quizID);
+                if(q != null)
+                {
+                    return q.retrieveResults(studentID);
+                }
+            }
+        }
         return null;
     }
     
     @Override
-    public List<String> retrieveAllResults(int quizID)
+    public List<Result> retrieveAllResults(int quizID)
     {
+        if (user.isSet())
+        {
+            if (user.get().access() == AccessLevel.student)
+            {
+                Quiz q = db.getQuiz(quizID);
+                if(q != null)
+                {
+                    return q.retrieveAllResults();
+                }
+            }
+        }
         return null;
     }
 }
