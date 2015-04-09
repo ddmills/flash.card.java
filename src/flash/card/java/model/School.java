@@ -18,7 +18,7 @@ public class School implements SchoolInterface {
 
 
     @Override
-    public boolean createTeacher(String name, String userID, String pass) {
+    public boolean createTeacher(String userID, String pass, String name) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.principal) {
                 if(db.getUser(userID) == null) {
@@ -31,10 +31,10 @@ public class School implements SchoolInterface {
     }
 
     @Override
-    public boolean createStudent(String name, String userID, String pass) {
+    public boolean createStudent(String userID, String pass, String name) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.teacher) {
-                Student s = new Student(name, userID, pass);
+                Student s = new Student(userID, pass, name);
                 return this.db.putStudent(s);
             }
         }

@@ -7,8 +7,8 @@ import flash.card.java.model.Result;
 
 public interface SchoolInterface {
     //Iteration 1:
-    boolean createTeacher (String name, String userID, String pass);
-    boolean createStudent (String name, String userID, String pass);
+    boolean createTeacher (String userID, String pass, String name);
+    boolean createStudent (String userID, String pass, String name);
     boolean login (String userID, String pass);
     boolean logout ();
     boolean createDeck (int deckID, String title, String description);

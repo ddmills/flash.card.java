@@ -16,13 +16,13 @@ public class SchoolController implements SchoolControllerInterface {
     }
 
     @Override
-    public boolean createTeacher(String name, String userID, String pass) {
-        return school.createTeacher(name, userID, pass);
+    public boolean createTeacher(String userID, String pass, String name) {
+        return school.createTeacher(userID, pass, name);
     }
 
     @Override
-    public boolean createStudent(String name, String userID, String pass) {
-        return school.createStudent(name, userID, pass);
+    public boolean createStudent(String userID, String pass, String name) {
+        return school.createStudent(userID, pass, name);
     }
 
     @Override

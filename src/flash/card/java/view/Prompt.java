@@ -166,7 +166,7 @@ public class Prompt {
             attempt(school.logout());
             break;
         case "create teacher":
-            attempt(school.createTeacher(ask("name"), ask("username"), ask("password")));
+            attempt(school.createTeacher(ask("username"), ask("password"), ask("name")));
             break;
         case "create student":
             attempt(school.createStudent(ask("username"), ask("password"), ask("name")));
