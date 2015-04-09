@@ -294,7 +294,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "");
         } catch (Exception e) {
             connection = null;
             e.printStackTrace();
@@ -372,14 +372,22 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         return (Teacher) getUser(teacherID);
     }
 
+    private boolean deleteSuccess(int rows)
+    {
+        if(rows > 0)
+            return true;
+        else
+            return false;
+    }
+
     @Override
     public boolean deleteDeck(int deckID)
     {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("Deck", deckColumns[0], "" + deckID);
-            stmt.execute(sql);
-            return true;
+            int rows = stmt.executeUpdate(sql);
+            return deleteSuccess(rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -392,8 +400,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("Quiz", quizColumns[0], "" + quizID);
-            stmt.execute(sql);
-            return true;
+            int rows = stmt.executeUpdate(sql);
+            return deleteSuccess(rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -406,8 +414,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("course", courseColumns[0], "" + courseID);
-            stmt.execute(sql);
-            return true;
+            int rows = stmt.executeUpdate(sql);
+            return deleteSuccess(rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -420,8 +428,8 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("user", userColumns[0], studentID);
-            stmt.execute(sql);
-            return true;
+            int rows = stmt.executeUpdate(sql);
+            return deleteSuccess(rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -434,13 +442,11 @@ public class DatabaseSupport implements DatabaseSupportInterface {
         try {
             Statement stmt = connection.createStatement();
             String sql = DatabaseHelpers.delete("user", userColumns[0], teacherID);
-            stmt.execute(sql);
-            return true;
+            int rows = stmt.executeUpdate(sql);
+            return deleteSuccess(rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
-
 }

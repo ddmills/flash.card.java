@@ -27,8 +27,13 @@ public class Student extends User implements StudentInterface {
 
     @Override
     public boolean addQuiz(Quiz q) {
-        quizList.put(q.getQuizID(), q);
-        return true;
+    
+        if(!quizList.containsKey(q.getQuizID())) {
+            quizList.put(q.getQuizID(), q);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

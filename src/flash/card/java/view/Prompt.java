@@ -187,7 +187,7 @@ public class Prompt {
             attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
             break;
         case "remove quiz from student":
-            attempt(school.addQuizToStudent(ask("student username"), askInt("quiz id")));
+            attempt(school.removeQuizFromStudent(ask("student username"), askInt("quiz id")));
             break;
         case "add student to course":
             attempt(school.addStudentToCourse(askInt("courseID"), ask("student id")));
