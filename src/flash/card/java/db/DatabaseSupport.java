@@ -294,7 +294,7 @@ public class DatabaseSupport implements DatabaseSupportInterface {
     private Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/flashcards", "root", "root");
         } catch (Exception e) {
             connection = null;
             e.printStackTrace();
