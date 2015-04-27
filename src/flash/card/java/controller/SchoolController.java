@@ -153,4 +153,16 @@ public class SchoolController implements SchoolControllerInterface {
     {
         return school.retrieveAllResults(quizID);
     }
+
+    @Override
+    public boolean editCardFront(int deckID, int cardID, String front)
+    {
+        return school.editCardFront(deckID, cardID, front);
+    }
+
+    @Override
+    public boolean editCardBack(int deckID, int cardID, String back)
+    {
+        return school.editCardBack(deckID, cardID, back);
+    }
 }

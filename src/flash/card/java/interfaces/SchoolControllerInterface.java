@@ -33,4 +33,7 @@ public interface SchoolControllerInterface {
     boolean endQuiz(int quizID, Result results);
     Result retrieveResults(int quizID);
     List<Result> retrieveAllResults(int quizID);
+    //Iteration 3:
+    boolean editCardFront(int deckID, int cardID, String front);
+    boolean editCardBack(int deckID, int cardID, String back);
 }

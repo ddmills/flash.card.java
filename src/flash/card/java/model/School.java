@@ -386,4 +386,42 @@ public class School implements SchoolInterface {
         }
         return null;
     }
+
+    @Override
+    public boolean editCardFront(int deckID, int cardID, String front)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                if(d != null)
+                {
+                    boolean updated = d.setCardFront(cardID, front);
+                    if(updated)
+                    {
+                        return db.putDeck(d);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editCardBack(int deckID, int cardID, String back)
+    {
+        if(user.isSet()) {
+            if(user.get().accessLevel == AccessLevel.teacher) {
+                Deck d = db.getDeck(deckID);
+                if(d != null)
+                {
+                    boolean updated = d.setCardBack(cardID, back);
+                    if(updated)
+                    {
+                        return db.putDeck(d);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

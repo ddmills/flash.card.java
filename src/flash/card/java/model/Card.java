@@ -28,4 +28,18 @@ public class Card implements CardInterface {
     public String getBack() {
         return back;
     }
+
+    @Override
+    public boolean setFront(String front)
+    {
+        this.front = front;
+        return true;
+    }
+
+    @Override
+    public boolean setBack(String back)
+    {
+        this.back = back;
+        return true;
+    }
 }

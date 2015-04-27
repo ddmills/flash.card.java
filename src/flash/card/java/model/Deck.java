@@ -105,4 +105,28 @@ public class Deck implements DeckInterface {
         this.title = deckTitle;
         return true;
     }
+
+    @Override
+    public boolean setCardFront(int cardID, String front)
+    {
+        Card card = cardList.get(cardID);
+        if(card != null)
+        {
+            card.setFront(front);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean setCardBack(int cardID, String back)
+    {
+        Card card = cardList.get(cardID);
+        if(card != null)
+        {
+            card.setBack(back);
+            return true;
+        }
+        return false;
+    }
 }

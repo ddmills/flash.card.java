@@ -204,6 +204,12 @@ public class Prompt {
         case "edit quiz title":
             attempt(school.editQuizTitle(askInt("quizID"), ask("new quiz title")));
             break;
+        case "edit card front":
+            attempt(school.editCardFront(askInt("deckID"), askInt("cardID"), ask("new front")));
+            break;
+        case "edit card back":
+            attempt(school.editCardBack(askInt("deckID"), askInt("cardID"), ask("new back")));
+            break;
         case "delete student":
             attempt(school.deleteStudent(ask("studentID")));
             break;
@@ -255,6 +261,8 @@ public class Prompt {
             println("- edit course name");
             println("- edit deck title");
             println("- edit quiz title");
+            println("- edit card front");
+            println("- edit card back");
             println("- retrieve results");
             println("- retrieve all results");
             break;

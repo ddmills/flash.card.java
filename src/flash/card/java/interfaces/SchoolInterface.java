@@ -33,4 +33,7 @@ public interface SchoolInterface {
     boolean endQuiz(int quizID, Result result);
     Result retrieveResults(int quizID);
     List<Result> retrieveAllResults(int quizID);
+    //Iteration 3:
+    boolean editCardFront(int deckID, int cardID, String front);
+    boolean editCardBack(int deckID, int cardID, String back);
 }
