@@ -34,8 +34,10 @@ public class School implements SchoolInterface {
     public boolean createStudent(String userID, String pass, String name) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.teacher) {
-                Student s = new Student(userID, pass, name);
-                return this.db.putStudent(s);
+                if (db.getUser(userID) == null)) {
+                    Student s = new Student(userID, pass, name);
+                    return this.db.putStudent(s);
+                }
             }
         }
         return false;
@@ -63,26 +65,28 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean createDeck(int deckID, String title, String description) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
-                Deck d = new Deck(deckID, title, description);
-                d.setOwner(this.user.get());
-                return db.putDeck(d);
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
+                if (db.getDeck(deckID) == null) {
+                    Deck d = new Deck(deckID, title, description);
+                    d.setOwner(this.user.get());
+                    return db.putDeck(d);
+                }
             }
         }
         return false;
-
     }
 
     @Override
     public boolean createCard(int cardID, String front, String back, int deckID) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                if(d != null)
-                {
-                    d.createCard(cardID, front, back);
-                    return db.putDeck(d);
+                if (d != null) {
+                    if (d.getCard(cardID) == null) {
+                        d.createCard(cardID, front, back);
+                        return db.putDeck(d);
+                    }
                 }
             }
         }
@@ -92,16 +96,12 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean deleteCard(int cardID, int deckID) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
                 Deck d = db.getDeck(deckID);
-                if(d != null)
-                {
+                if (d != null) {
                     boolean exists = d.deleteCard(cardID);
-                    if(exists)
-                    {
-                        return db.putDeck(d);
-                    }
+                    if (exists) return db.putDeck(d);
                 }
             }
         }
@@ -314,7 +314,7 @@ public class School implements SchoolInterface {
         }
         return false;
     }
-    
+
     @Override
     public Quiz startQuiz(int quizID)
     {
@@ -335,7 +335,7 @@ public class School implements SchoolInterface {
         }
         return null;
     }
-    
+
     @Override
     public boolean endQuiz(int quizID, Result result)
     {
@@ -353,7 +353,7 @@ public class School implements SchoolInterface {
         }
         return false;
     }
-    
+
     @Override
     public Result retrieveResults(int quizID)
     {
@@ -371,7 +371,7 @@ public class School implements SchoolInterface {
         }
         return null;
     }
-    
+
     @Override
     public List<Result> retrieveAllResults(int quizID)
     {
@@ -434,10 +434,10 @@ public class School implements SchoolInterface {
                 Student s = db.getStudent(studentID);
             }
         }
-        
+
         return false;
     }
-    
+
     @Override
     public boolean editStudentPassword(String studentID, String password) {
         return false;
