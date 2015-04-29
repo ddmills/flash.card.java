@@ -36,4 +36,6 @@ public interface SchoolControllerInterface {
     //Iteration 3:
     boolean editCardFront(int deckID, int cardID, String front);
     boolean editCardBack(int deckID, int cardID, String back);
+    boolean editStudentName(String studentID, String name);
+    boolean editStudentPassword(String studentID, String password);
 }

@@ -237,6 +237,12 @@ public class Prompt {
         case "retrieve all results":
             displayResultList(school.retrieveAllResults(askInt("quizID")));
             break;
+        case "edit student name":
+            attempt(school.editStudentName(ask("student id"), ask("new name")));
+            break;
+        case "edit student password":
+            attempt(school.editStudentPassword(ask("student id"), ask("new password")));
+            break;
         case "help":
         case "commands":
             println("- login");
@@ -265,6 +271,8 @@ public class Prompt {
             println("- edit card back");
             println("- retrieve results");
             println("- retrieve all results");
+            println("- edit student name");
+            println("- edit student password");
             break;
         case "exit":
             running = false;

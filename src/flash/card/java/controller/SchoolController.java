@@ -165,4 +165,14 @@ public class SchoolController implements SchoolControllerInterface {
     {
         return school.editCardBack(deckID, cardID, back);
     }
+
+    @Override
+    public boolean editStudentName(String studentID, String name) {
+        return school.editStudentName(studentID, name);
+    }
+    
+    @Override
+    public boolean editStudentPassword(String studentID, String password) {
+        return school.editStudentPassword(studentID, password);
+    }
 }
