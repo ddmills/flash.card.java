@@ -38,4 +38,6 @@ public interface SchoolInterface {
     boolean editCardBack(int deckID, int cardID, String back);
     boolean editStudentName(String studentID, String name);
     boolean editStudentPassword(String studentID, String password);
+    boolean editTeacherName(String teacherID, String name);
+    boolean editTeacherPassword(String teacherID, String password);
 }

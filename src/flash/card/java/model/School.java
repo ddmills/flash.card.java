@@ -437,4 +437,28 @@ public class School implements SchoolInterface {
     public boolean editStudentPassword(String studentID, String password) {
         return false;
     }
+
+    @Override
+    public boolean editTeacherName(String teacherID, String name) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.principal) {
+                Teacher t = db.getTeacher(teacherID);
+                t.setName(name);
+                return db.putTeacher(t);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editTeacherPassword(String teacherID, String password) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.principal) {
+                Teacher t = db.getTeacher(teacherID);
+                t.setPassword(password);
+                return db.putTeacher(t);
+            }
+        }
+        return false;
+    }
 }
