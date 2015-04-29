@@ -31,4 +31,12 @@ public abstract class User {
     public String getPassword() {
         return this.password;
     }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
