@@ -34,7 +34,7 @@ public class School implements SchoolInterface {
     public boolean createStudent(String userID, String pass, String name) {
         if (user.isSet()) {
             if (user.get().access() == AccessLevel.teacher) {
-                if (db.getUser(userID) == null)) {
+                if (db.getUser(userID) == null) {
                     Student s = new Student(userID, pass, name);
                     return this.db.putStudent(s);
                 }
@@ -91,7 +91,6 @@ public class School implements SchoolInterface {
             }
         }
         return false;
-
     }
 
     @Override
@@ -110,31 +109,29 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean createQuiz(int quizID, String title, String description, int deckID) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
-                Deck d = db.getDeck(deckID);
-                if(d != null)
-                {
-                    Quiz q = new Quiz(quizID, title, description, d);
-                    q.setOwner(this.user.get());
-                    return db.putQuiz(q);
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
+                if (db.getQuiz(quizID) == null) {
+                    Deck d = db.getDeck(deckID);
+                    if (d != null) {
+                        Quiz q = new Quiz(quizID, title, description, d);
+                        q.setOwner(this.user.get());
+                        return db.putQuiz(q);
+                    }
                 }
             }
         }
         return false;
-
     }
 
     @Override
     public boolean addQuizToStudent(String userID, int quizID) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);
-                if(s != null)
-                {
+                if (s != null) {
                     Quiz q = db.getQuiz(quizID);
-                    if(q != null)
-                    {
+                    if (q != null) {
                         return s.addQuiz(q) ? db.putStudent(s) : false;
                     }
                 }
@@ -145,14 +142,12 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean removeQuizFromStudent(String userID, int quizID) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(userID);
-                if(s != null)
-                {
+                if (s != null) {
                     Quiz q = db.getQuiz(quizID);
-                    if(q != null)
-                    {
+                    if (q != null) {
                         return s.removeQuiz(q) ? db.putStudent(s) : false;
                     }
                 }
@@ -163,9 +158,9 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean createCourse(int courseID, String title) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
-                if(db.getCourse(courseID) == null) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
+                if (db.getCourse(courseID) == null) {
                     Course c = new Course(courseID, (Teacher)user.get(), title, new HashMap<String, Student>());
                     return this.db.putCourse(c);
                 }
