@@ -424,17 +424,29 @@ public class School implements SchoolInterface {
 
     @Override
     public boolean editStudentName(String studentID, String name) {
-        if(user.isSet()) {
-            if(user.get().accessLevel == AccessLevel.teacher) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
                 Student s = db.getStudent(studentID);
+                if (s != null) {
+                    s.setName(name);
+                    return db.putStudent(s);
+                }
             }
         }
-
         return false;
     }
 
     @Override
     public boolean editStudentPassword(String studentID, String password) {
+        if (user.isSet()) {
+            if (user.get().accessLevel == AccessLevel.teacher) {
+                Student s = db.getStudent(studentID);
+                if (s != null) {
+                    s.setPassword(password);
+                    return db.putStudent(s);
+                }
+            }
+        }
         return false;
     }
 
@@ -443,8 +455,10 @@ public class School implements SchoolInterface {
         if (user.isSet()) {
             if (user.get().accessLevel == AccessLevel.principal) {
                 Teacher t = db.getTeacher(teacherID);
-                t.setName(name);
-                return db.putTeacher(t);
+                if (t != null) {
+                    t.setName(name);
+                    return db.putTeacher(t);
+                }
             }
         }
         return false;
@@ -455,8 +469,10 @@ public class School implements SchoolInterface {
         if (user.isSet()) {
             if (user.get().accessLevel == AccessLevel.principal) {
                 Teacher t = db.getTeacher(teacherID);
-                t.setPassword(password);
-                return db.putTeacher(t);
+                if (t != null) {
+                    t.setPassword(password);
+                    return db.putTeacher(t);
+                }
             }
         }
         return false;
