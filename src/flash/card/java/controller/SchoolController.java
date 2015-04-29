@@ -129,25 +129,25 @@ public class SchoolController implements SchoolControllerInterface {
     {
         return school.deleteQuiz(quizID);
     }
-    
+
     @Override
     public Quiz startQuiz(int quizID)
     {
         return school.startQuiz(quizID);
     }
-    
+
     @Override
     public boolean endQuiz(int quizID, Result results)
     {
         return school.endQuiz(quizID, results);
     }
-    
+
     @Override
     public Result retrieveResults(int quizID)
     {
         return school.retrieveResults(quizID);
     }
-    
+
     @Override
     public List<Result> retrieveAllResults(int quizID)
     {
@@ -170,9 +170,19 @@ public class SchoolController implements SchoolControllerInterface {
     public boolean editStudentName(String studentID, String name) {
         return school.editStudentName(studentID, name);
     }
-    
+
     @Override
     public boolean editStudentPassword(String studentID, String password) {
         return school.editStudentPassword(studentID, password);
+    }
+
+    @Override
+    public boolean editTeacherName(String teacherID, String name) {
+        return school.editTeacherName(teacherID, name);
+    }
+
+    @Override
+    public boolean editTeacherPassword(String teacherID, String password) {
+        return school.editTeacherPassword(teacherID, password);
     }
 }

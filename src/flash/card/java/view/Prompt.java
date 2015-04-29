@@ -82,7 +82,7 @@ public class Prompt {
         print(var + ": ");
         return readInt();
     }
-    
+
     private void displayResult(Result result) {
         if(result == null)
         {
@@ -93,7 +93,7 @@ public class Prompt {
             System.out.println();
             println("Student: " + result.getStudent().getUserID());
             System.out.println();
-            
+
             HashMap<Integer, Answer> qaPair = result.getAnswers();
             for (Integer id : qaPair.keySet())
             {
@@ -105,7 +105,7 @@ public class Prompt {
             }
         }
     }
-    
+
     private void displayResultList(List<Result> list) {
         if(list == null)
         {
@@ -127,17 +127,17 @@ public class Prompt {
             println(cmd + " failed");
         }
     }
-    
+
     private void runQuiz(int quizID)
     {
         Quiz quiz = school.startQuiz(quizID);
         if (quiz != null)
         {
             println("Loading quiz succeeded.");
-            
+
             CurrentUser user = CurrentUser.getInstance();
             Result result = new Result(quizID, (Student)user.get());
-            
+
             HashMap<Integer, Card> questions = quiz.getDeck().getCards();
             for (Integer cardID : questions.keySet())
             {
@@ -148,7 +148,7 @@ public class Prompt {
                 Answer answer = new Answer(cardID, question.getFront(), question.getBack(), actualAnswer);
                 result.addAnswer(answer);
             }
-            
+
             school.endQuiz(quizID, result);
         }
         else
@@ -156,7 +156,7 @@ public class Prompt {
             println("Loading quiz failed.");
         }
     }
-    
+
     private void handle(String command) {
         switch (command) {
         case "login":
@@ -243,6 +243,12 @@ public class Prompt {
         case "edit student password":
             attempt(school.editStudentPassword(ask("student id"), ask("new password")));
             break;
+        case "edit teacher name":
+            attempt(school.editTeacherName(ask("student id"), ask("new name")));
+            break;
+        case "edit teacher password":
+            attempt(school.editTeacherPassword(ask("student id"), ask("new password")));
+            break;
         case "help":
         case "commands":
             println("- login");
@@ -273,6 +279,8 @@ public class Prompt {
             println("- retrieve all results");
             println("- edit student name");
             println("- edit student password");
+            println("- edit teacher name");
+            println("- edit teacher password");
             break;
         case "exit":
             running = false;
